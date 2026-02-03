@@ -7,9 +7,17 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // Enable CORS
+  const corsOrigins = process.env.CORS_ORIGIN?.split(',').map(o => o.trim()) || [
+    'http://localhost:3000',
+    'http://localhost:4000',
+  ];
+  console.log('CORS origins:', corsOrigins);
+  
   app.enableCors({
-    origin: process.env.CORS_ORIGIN?.split(',') || ['http://localhost:3000', 'http://localhost:4000'],
+    origin: corsOrigins,
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
   });
 
   // Global API prefix
