@@ -78,20 +78,29 @@ export class ProductsService {
   async createProduct(dto: CreateProductDto): Promise<Product> {
     const sku = dto.sku || `PFM-${Date.now()}`;
 
+    // Check for existing SKU (including soft-deleted products since SKU must be unique)
     const existingProduct = await this.productRepository.findOne({
       where: { sku },
+      withDeleted: true,
     });
 
     if (existingProduct) {
-      throw new ConflictException('Product with this SKU already exists');
+      throw new ConflictException(`Product with SKU "${sku}" already exists`);
     }
 
-    const product = this.productRepository.create({
-      ...dto,
-      sku,
-    });
+    try {
+      const product = this.productRepository.create({
+        ...dto,
+        sku,
+      });
 
-    return this.productRepository.save(product);
+      return await this.productRepository.save(product);
+    } catch (error: any) {
+      if (error.code === '23505') { // PostgreSQL unique constraint violation
+        throw new ConflictException(`Product with SKU "${sku}" already exists`);
+      }
+      throw error;
+    }
   }
 
   async updateProduct(id: string, dto: UpdateProductDto): Promise<Product> {
