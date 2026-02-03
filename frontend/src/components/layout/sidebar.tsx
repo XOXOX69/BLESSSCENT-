@@ -40,24 +40,24 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        'fixed left-0 top-0 z-40 h-screen bg-slate-900 text-white transition-all duration-300',
+        'fixed left-0 top-0 z-40 h-screen bg-black text-white transition-all duration-300',
         collapsed ? 'w-16' : 'w-64'
       )}
     >
-      <div className="flex h-16 items-center justify-between px-4 border-b border-slate-800">
+      <div className="flex h-16 items-center justify-between px-4 border-b border-yellow-900/30">
         {!collapsed && (
           <Link href="/dashboard" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">B</span>
+            <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
+              <span className="text-black font-bold text-sm">B</span>
             </div>
-            <span className="font-semibold text-lg">BLESSCENT</span>
+            <span className="font-semibold text-lg text-yellow-400">BLESSCENT</span>
           </Link>
         )}
         <Button
           variant="ghost"
           size="sm"
           onClick={() => setCollapsed(!collapsed)}
-          className="text-slate-400 hover:text-white hover:bg-slate-800"
+          className="text-yellow-400/70 hover:text-yellow-400 hover:bg-yellow-400/10"
         >
           {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
         </Button>
@@ -75,8 +75,8 @@ export function Sidebar() {
               className={cn(
                 'flex items-center px-3 py-2.5 rounded-lg transition-colors',
                 isActive
-                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-medium'
+                  : 'text-gray-400 hover:text-yellow-400 hover:bg-yellow-400/10'
               )}
             >
               <Icon className="h-5 w-5 flex-shrink-0" />

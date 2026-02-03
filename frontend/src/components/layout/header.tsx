@@ -22,9 +22,9 @@ export function Header() {
     : 'U';
 
   return (
-    <header className="sticky top-0 z-30 h-16 bg-white border-b flex items-center justify-between px-6">
+    <header className="sticky top-0 z-30 h-16 bg-white border-b border-yellow-200/50 flex items-center justify-between px-6">
       <div className="flex items-center space-x-4">
-        <h1 className="text-xl font-semibold text-slate-800">
+        <h1 className="text-xl font-semibold text-gray-800">
           Welcome back, {user?.firstName || 'User'}
         </h1>
       </div>
@@ -32,7 +32,7 @@ export function Header() {
       <div className="flex items-center space-x-4">
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5" />
-          <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs">
+          <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-yellow-400 text-black">
             3
           </Badge>
         </Button>
@@ -41,7 +41,7 @@ export function Header() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-10 w-10 rounded-full">
               <Avatar className="h-10 w-10">
-                <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
+                <AvatarFallback className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold">
                   {initials}
                 </AvatarFallback>
               </Avatar>

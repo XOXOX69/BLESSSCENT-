@@ -41,11 +41,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black to-gray-900 p-4">
+      <Card className="w-full max-w-md border-yellow-400/20">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-4 w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-            <span className="text-white text-2xl font-bold">B</span>
+          <div className="mx-auto mb-4 w-16 h-16 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
+            <span className="text-black text-2xl font-bold">B</span>
           </div>
           <CardTitle className="text-2xl">BLESSCENT</CardTitle>
           <CardDescription>Admin Dashboard</CardDescription>
