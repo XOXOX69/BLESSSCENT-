@@ -98,10 +98,16 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
   });
 
   const onSubmit = async (data: ProductFormData) => {
-    if (isEdit) {
-      await updateMutation.mutateAsync(data);
-    } else {
-      await createMutation.mutateAsync(data);
+    console.log('Submitting product data:', data);
+    try {
+      if (isEdit) {
+        await updateMutation.mutateAsync(data);
+      } else {
+        await createMutation.mutateAsync(data);
+      }
+      console.log('Product saved successfully');
+    } catch (error) {
+      console.error('Submit error:', error);
     }
   };
 
