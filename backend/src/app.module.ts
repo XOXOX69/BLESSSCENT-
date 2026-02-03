@@ -25,18 +25,22 @@ import { BranchesModule } from './modules/branches/branches.module';
     // Database
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get('DB_HOST', 'localhost'),
-        port: configService.get('DB_PORT', 5432),
-        username: configService.get('DB_USER') || configService.get('DB_USERNAME') || 'postgres',
-        password: configService.get('DB_PASSWORD', 'postgres'),
-        database: configService.get('DB_NAME') || configService.get('DB_DATABASE') || 'blesscent',
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true, // Enable for initial table creation
-        logging: configService.get('NODE_ENV') === 'development',
-        ssl: configService.get('DB_SSL', 'false') === 'true' ? { rejectUnauthorized: false } : false,
-      }),
+      useFactory: (configService: ConfigService) => {
+        const dbConfig = {
+          type: 'postgres' as const,
+          host: configService.get('DB_HOST') || 'localhost',
+          port: parseInt(configService.get('DB_PORT') || '5432'),
+          username: configService.get('DB_USER') || configService.get('DB_USERNAME') || 'postgres',
+          password: configService.get('DB_PASSWORD') || 'postgres',
+          database: configService.get('DB_NAME') || configService.get('DB_DATABASE') || 'blesscent',
+          entities: [__dirname + '/**/*.entity{.ts,.js}'],
+          synchronize: true,
+          logging: configService.get('NODE_ENV') === 'development',
+          ssl: configService.get('DB_SSL') === 'true' ? { rejectUnauthorized: false } : false,
+        };
+        console.log('Database config:', { ...dbConfig, password: '***' });
+        return dbConfig;
+      },
       inject: [ConfigService],
     }),
 
