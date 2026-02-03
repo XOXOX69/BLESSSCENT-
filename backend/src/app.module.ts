@@ -29,9 +29,9 @@ import { BranchesModule } from './modules/branches/branches.module';
         type: 'postgres',
         host: configService.get('DB_HOST', 'localhost'),
         port: configService.get('DB_PORT', 5432),
-        username: configService.get('DB_USER', configService.get('DB_USERNAME', 'postgres')),
+        username: configService.get('DB_USER') || configService.get('DB_USERNAME') || 'postgres',
         password: configService.get('DB_PASSWORD', 'postgres'),
-        database: configService.get('DB_NAME', configService.get('DB_DATABASE', 'blesscent')),
+        database: configService.get('DB_NAME') || configService.get('DB_DATABASE') || 'blesscent',
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true, // Enable for initial table creation
         logging: configService.get('NODE_ENV') === 'development',
