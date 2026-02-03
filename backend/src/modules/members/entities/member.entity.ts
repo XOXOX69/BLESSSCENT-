@@ -19,10 +19,10 @@ export class Member {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'branch_id' })
+  @Column({ name: 'branch_id', nullable: true })
   branchId: string;
 
-  @ManyToOne(() => Branch, { onDelete: 'RESTRICT' })
+  @ManyToOne(() => Branch, { onDelete: 'RESTRICT', nullable: true })
   @JoinColumn({ name: 'branch_id' })
   branch: Branch;
 

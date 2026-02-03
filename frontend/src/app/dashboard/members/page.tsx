@@ -44,10 +44,10 @@ export default function MembersPage() {
   const queryClient = useQueryClient();
 
   const [form, setForm] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     phone: '',
     email: '',
-    address: '',
   });
 
   const { data, isLoading } = useQuery({
@@ -99,17 +99,17 @@ export default function MembersPage() {
   });
 
   const resetForm = () => {
-    setForm({ name: '', phone: '', email: '', address: '' });
+    setForm({ firstName: '', lastName: '', phone: '', email: '' });
     setEditMember(null);
   };
 
   const handleEdit = (member: any) => {
     setEditMember(member);
     setForm({
-      name: member.name,
+      firstName: member.firstName || '',
+      lastName: member.lastName || '',
       phone: member.phone || '',
       email: member.email || '',
-      address: member.address || '',
     });
     setShowDialog(true);
   };
@@ -225,7 +225,7 @@ export default function MembersPage() {
                   return (
                     <TableRow key={member.id}>
                       <TableCell>
-                        <div className="font-medium">{member.name}</div>
+                        <div className="font-medium">{member.firstName} {member.lastName}</div>
                         <div className="text-sm text-muted-foreground font-mono">
                           {member.memberCode}
                         </div>
@@ -327,14 +327,25 @@ export default function MembersPage() {
             }}
             className="space-y-4"
           >
-            <div className="space-y-2">
-              <Label htmlFor="name">Name *</Label>
-              <Input
-                id="name"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                required
-              />
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName">First Name *</Label>
+                <Input
+                  id="firstName"
+                  value={form.firstName}
+                  onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="lastName">Last Name *</Label>
+                <Input
+                  id="lastName"
+                  value={form.lastName}
+                  onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                  required
+                />
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -354,14 +365,6 @@ export default function MembersPage() {
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                 />
               </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="address">Address</Label>
-              <Input
-                id="address"
-                value={form.address}
-                onChange={(e) => setForm({ ...form, address: e.target.value })}
-              />
             </div>
             <div className="flex justify-end gap-2">
               <Button type="button" variant="outline" onClick={() => setShowDialog(false)}>
@@ -384,7 +387,7 @@ export default function MembersPage() {
           {selectedMember && (
             <div className="space-y-4">
               <div className="p-4 bg-slate-50 rounded-lg">
-                <p className="font-medium">{selectedMember.name}</p>
+                <p className="font-medium">{selectedMember.firstName} {selectedMember.lastName}</p>
                 <p className="text-sm text-muted-foreground">
                   Current points: {(selectedMember.points || 0).toLocaleString()}
                 </p>

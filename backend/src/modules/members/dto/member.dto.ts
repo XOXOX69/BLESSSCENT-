@@ -30,9 +30,10 @@ export enum MemberTier {
 }
 
 export class CreateMemberDto {
-  @ApiProperty({ description: 'Branch ID where member registered' })
+  @ApiPropertyOptional({ description: 'Branch ID where member registered' })
   @IsUUID()
-  branchId: string;
+  @IsOptional()
+  branchId?: string;
 
   @ApiProperty({ description: 'First name' })
   @IsString()

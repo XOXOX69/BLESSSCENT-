@@ -23,7 +23,7 @@ export class MembersService {
   /**
    * Generate unique member code
    */
-  private async generateMemberCode(branchId: string): Promise<string> {
+  private async generateMemberCode(branchId?: string): Promise<string> {
     const prefix = 'MBR';
     const date = new Date();
     const year = date.getFullYear().toString().slice(-2);
