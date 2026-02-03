@@ -136,7 +136,7 @@ export default function ProductsPage() {
                     Loading...
                   </TableCell>
                 </TableRow>
-              ) : data?.data?.length === 0 ? (
+              ) : data?.products?.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={7} className="text-center py-8">
                     <Package className="mx-auto h-12 w-12 text-muted-foreground mb-2" />
@@ -144,7 +144,7 @@ export default function ProductsPage() {
                   </TableCell>
                 </TableRow>
               ) : (
-                data?.data?.map((product: any) => (
+                data?.products?.map((product: any) => (
                   <TableRow key={product.id}>
                     <TableCell>
                       <div className="font-medium">{product.name}</div>

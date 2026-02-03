@@ -82,11 +82,19 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
   const createMutation = useMutation({
     mutationFn: (data: ProductFormData) => productsApi.create(data),
     onSuccess,
+    onError: (error: any) => {
+      console.error('Create product error:', error);
+      alert(error.response?.data?.message || 'Failed to create product');
+    },
   });
 
   const updateMutation = useMutation({
     mutationFn: (data: ProductFormData) => productsApi.update(product!.id, data),
     onSuccess,
+    onError: (error: any) => {
+      console.error('Update product error:', error);
+      alert(error.response?.data?.message || 'Failed to update product');
+    },
   });
 
   const onSubmit = async (data: ProductFormData) => {
