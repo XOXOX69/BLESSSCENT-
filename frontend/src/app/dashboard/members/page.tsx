@@ -212,7 +212,7 @@ export default function MembersPage() {
                     Loading...
                   </TableCell>
                 </TableRow>
-              ) : data?.items?.length === 0 ? (
+              ) : data?.data?.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={7} className="text-center py-8">
                     <Users className="mx-auto h-12 w-12 text-muted-foreground mb-2" />
@@ -220,7 +220,7 @@ export default function MembersPage() {
                   </TableCell>
                 </TableRow>
               ) : (
-                data?.items?.map((member: any) => {
+                data?.data?.map((member: any) => {
                   const tier = getTierBadge(member.points || 0);
                   return (
                     <TableRow key={member.id}>
