@@ -50,8 +50,10 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
     queryKey: ['categories'],
     queryFn: async () => {
       const response = await productsApi.getCategories();
-      return response.data;
+      return response.data || [];
     },
+    retry: 1,
+    staleTime: 5 * 60 * 1000,
   });
 
   const {
@@ -59,7 +61,7 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
     handleSubmit,
     setValue,
     watch,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<ProductFormData>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(productSchema) as any,
@@ -81,7 +83,10 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
 
   const createMutation = useMutation({
     mutationFn: (data: ProductFormData) => productsApi.create(data),
-    onSuccess,
+    onSuccess: () => {
+      console.log('Product created successfully');
+      onSuccess();
+    },
     onError: (error: any) => {
       console.error('Create product error:', error);
       alert(error.response?.data?.message || 'Failed to create product');
@@ -90,26 +95,26 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
 
   const updateMutation = useMutation({
     mutationFn: (data: ProductFormData) => productsApi.update(product!.id, data),
-    onSuccess,
+    onSuccess: () => {
+      console.log('Product updated successfully');
+      onSuccess();
+    },
     onError: (error: any) => {
       console.error('Update product error:', error);
       alert(error.response?.data?.message || 'Failed to update product');
     },
   });
 
-  const onSubmit = async (data: ProductFormData) => {
+  const onSubmit = (data: ProductFormData) => {
     console.log('Submitting product data:', data);
-    try {
-      if (isEdit) {
-        await updateMutation.mutateAsync(data);
-      } else {
-        await createMutation.mutateAsync(data);
-      }
-      console.log('Product saved successfully');
-    } catch (error) {
-      console.error('Submit error:', error);
+    if (isEdit) {
+      updateMutation.mutate(data);
+    } else {
+      createMutation.mutate(data);
     }
   };
+
+  const isPending = createMutation.isPending || updateMutation.isPending;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -216,8 +221,8 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
       </div>
 
       <div className="flex justify-end gap-2 pt-4">
-        <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? (
+        <Button type="submit" disabled={isPending}>
+          {isPending ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               {isEdit ? 'Updating...' : 'Creating...'}
