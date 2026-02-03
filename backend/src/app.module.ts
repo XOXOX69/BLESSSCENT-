@@ -25,23 +25,23 @@ import { BranchesModule } from './modules/branches/branches.module';
     // Database
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => {
+      useFactory: () => {
         const dbConfig = {
           type: 'postgres' as const,
-          host: configService.get('DB_HOST') || 'localhost',
-          port: parseInt(configService.get('DB_PORT') || '5432'),
-          username: configService.get('DB_USER') || configService.get('DB_USERNAME') || 'postgres',
-          password: configService.get('DB_PASSWORD') || 'postgres',
-          database: configService.get('DB_NAME') || configService.get('DB_DATABASE') || 'blesscent',
+          host: process.env.DB_HOST || 'localhost',
+          port: parseInt(process.env.DB_PORT || '5432'),
+          username: process.env.DB_USER || process.env.DB_USERNAME || 'postgres',
+          password: process.env.DB_PASSWORD || 'postgres',
+          database: process.env.DB_NAME || process.env.DB_DATABASE || 'blesscent',
           entities: [__dirname + '/**/*.entity{.ts,.js}'],
           synchronize: true,
-          logging: configService.get('NODE_ENV') === 'development',
-          ssl: configService.get('DB_SSL') === 'true' ? { rejectUnauthorized: false } : false,
+          logging: process.env.NODE_ENV === 'development',
+          ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
         };
         console.log('Database config:', { ...dbConfig, password: '***' });
         return dbConfig;
       },
-      inject: [ConfigService],
+      inject: [],
     }),
 
     // Feature modules
