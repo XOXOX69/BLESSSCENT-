@@ -189,6 +189,13 @@ export const reportsApi = {
     api.get('/reports/sales/export', { params, responseType: 'blob' }),
 };
 
+// Notifications API
+export const notificationsApi = {
+  getAll: () => api.get('/reports/dashboard'),
+  getLowStock: () => api.get('/inventory/low-stock'),
+  getOverdue: () => api.get('/ledger/overdue'),
+};
+
 // Sales API (for reports)
 export const salesApi = {
   getAll: (params?: { branchId?: string; limit?: number; offset?: number }) =>
