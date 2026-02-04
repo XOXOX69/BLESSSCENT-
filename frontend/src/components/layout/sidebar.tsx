@@ -33,15 +33,22 @@ const navItems = [
   { href: '/dashboard/users', label: 'Users', icon: Settings },
 ];
 
-export function Sidebar() {
+export function Sidebar({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+
+  const handleNavClick = () => {
+    // Close sidebar on mobile when a nav item is clicked
+    if (onClose) {
+      onClose();
+    }
+  };
 
   return (
     <aside
       className={cn(
-        'fixed left-0 top-0 z-40 h-screen bg-black text-white transition-all duration-300',
-        collapsed ? 'w-16' : 'w-64'
+        'h-screen bg-black text-white transition-all duration-300 w-64 flex-shrink-0',
+        collapsed ? 'lg:w-16' : 'lg:w-64'
       )}
     >
       <div className="flex h-16 items-center justify-between px-4 border-b border-yellow-900/30">
@@ -72,6 +79,7 @@ export function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={handleNavClick}
               className={cn(
                 'flex items-center px-3 py-2.5 rounded-lg transition-colors',
                 isActive

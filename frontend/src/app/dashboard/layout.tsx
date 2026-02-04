@@ -41,7 +41,7 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div 
@@ -50,17 +50,16 @@ export default function DashboardLayout({
         />
       )}
       
-      {/* Sidebar - hidden on mobile, shown on lg+ */}
+      {/* Sidebar - fixed on mobile (slide in), static on desktop */}
       <div className={`
-        fixed inset-y-0 left-0 z-50 transform transition-transform duration-300 ease-in-out
-        lg:translate-x-0 lg:static lg:z-auto
-        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 lg:flex-shrink-0
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
-        <Sidebar />
+        <Sidebar onClose={() => setSidebarOpen(false)} />
       </div>
       
       {/* Main content */}
-      <div className="lg:ml-64 transition-all duration-300">
+      <div className="flex-1 min-w-0">
         {/* Mobile header with menu button */}
         <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-3">
           <Button
