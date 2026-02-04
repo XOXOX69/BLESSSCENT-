@@ -227,7 +227,7 @@ export function Header() {
                         !notification.read ? 'bg-yellow-50/50' : ''
                       }`}
                     >
-                      <div className="flex-shrink-0 mt-0.5">
+                      <div className="shrink-0 mt-0.5">
                         <div className={`h-8 w-8 rounded-full flex items-center justify-center ${
                           notification.type === 'low_stock' ? 'bg-orange-100' :
                           notification.type === 'overdue' ? 'bg-red-100' :
@@ -243,7 +243,7 @@ export function Header() {
                             {notification.title}
                           </p>
                           {!notification.read && (
-                            <span className="h-2 w-2 bg-yellow-400 rounded-full flex-shrink-0" />
+                            <span className="h-2 w-2 bg-yellow-400 rounded-full shrink-0" />
                           )}
                         </div>
                         <p className="text-sm text-gray-600 line-clamp-2">
@@ -273,7 +273,7 @@ export function Header() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-10 w-10 rounded-full">
               <Avatar className="h-10 w-10">
-                <AvatarFallback className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold">
+                <AvatarFallback className="bg-linear-to-r from-yellow-400 to-amber-500 text-black font-bold">
                   {initials}
                 </AvatarFallback>
               </Avatar>

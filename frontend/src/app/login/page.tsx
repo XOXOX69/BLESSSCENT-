@@ -34,13 +34,14 @@ export default function LoginPage() {
     setError('');
     try {
       await login(data.email, data.password);
-    } catch (err: any) {
-      setError(err.message || 'Login failed');
+    } catch (err: unknown) {
+      const error = err as Error;
+      setError(error.message || 'Login failed');
     }
   };
 
   return (
-    <div className="min-h-[100dvh] flex flex-col lg:flex-row">
+    <div className="min-h-dvh flex flex-col lg:flex-row">
       {/* Left Side - Branding (hidden on mobile) */}
       <div className="hidden lg:flex lg:w-1/2 bg-black relative overflow-hidden">
         {/* Animated background elements */}
@@ -53,7 +54,7 @@ export default function LoginPage() {
         {/* Content */}
         <div className="relative z-10 flex flex-col justify-center items-center w-full p-12">
           <div className="mb-8">
-            <div className="w-24 h-24 bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-yellow-500/25 transform rotate-3 hover:rotate-0 transition-transform duration-300">
+            <div className="w-24 h-24 bg-linear-to-br from-yellow-400 via-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-yellow-500/25 transform rotate-3 hover:rotate-0 transition-transform duration-300">
               <span className="text-black text-5xl font-black">B</span>
             </div>
           </div>
@@ -95,7 +96,7 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side - Login Form */}
-      <div className="flex-1 w-full lg:w-1/2 flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-900 to-black px-4 py-8 sm:px-6 sm:py-12 lg:p-8">
+      <div className="flex-1 w-full lg:w-1/2 flex items-center justify-center bg-linear-to-br from-gray-900 via-gray-900 to-black px-4 py-8 sm:px-6 sm:py-12 lg:p-8">
         {/* Mobile background glow */}
         <div className="absolute inset-0 lg:hidden overflow-hidden pointer-events-none">
           <div className="absolute top-10 right-10 w-40 h-40 bg-yellow-400/10 rounded-full blur-3xl" />
@@ -105,7 +106,7 @@ export default function LoginPage() {
         <div className="w-full max-w-md relative z-10">
           {/* Mobile Logo */}
           <div className="lg:hidden text-center mb-6 sm:mb-8">
-            <div className="inline-flex w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-xl items-center justify-center mb-3 sm:mb-4 shadow-lg shadow-yellow-500/20">
+            <div className="inline-flex w-14 h-14 sm:w-16 sm:h-16 bg-linear-to-br from-yellow-400 to-amber-500 rounded-xl items-center justify-center mb-3 sm:mb-4 shadow-lg shadow-yellow-500/20">
               <span className="text-black text-2xl sm:text-3xl font-black">B</span>
             </div>
             <h1 className="text-xl sm:text-2xl font-bold text-white">
@@ -123,7 +124,7 @@ export default function LoginPage() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
               {error && (
                 <div className="p-3 sm:p-4 text-xs sm:text-sm text-red-400 bg-red-500/10 rounded-xl border border-red-500/20 flex items-center gap-2">
-                  <div className="w-2 h-2 bg-red-400 rounded-full flex-shrink-0" />
+                  <div className="w-2 h-2 bg-red-400 rounded-full shrink-0" />
                   {error}
                 </div>
               )}
@@ -178,7 +179,7 @@ export default function LoginPage() {
 
               <Button 
                 type="submit" 
-                className="w-full h-11 sm:h-12 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-bold rounded-xl shadow-lg shadow-yellow-500/25 transition-all duration-300 hover:shadow-yellow-500/40 active:scale-[0.98] text-sm sm:text-base" 
+                className="w-full h-11 sm:h-12 bg-linear-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-bold rounded-xl shadow-lg shadow-yellow-500/25 transition-all duration-300 hover:shadow-yellow-500/40 active:scale-[0.98] text-sm sm:text-base" 
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (

@@ -27,7 +27,7 @@ export default function DashboardLayout({
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse">
+          <div className="w-16 h-16 bg-linear-to-br from-yellow-400 to-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse">
             <span className="text-black text-2xl font-black">B</span>
           </div>
           <Loader2 className="h-6 w-6 animate-spin text-yellow-500 mx-auto" />
@@ -74,7 +74,7 @@ export default function DashboardLayout({
               <Menu className="h-6 w-6" />
             </Button>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-linear-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
                 <span className="text-black text-sm font-bold">B</span>
               </div>
               <span className="font-semibold text-gray-800">BLESSCENT</span>
