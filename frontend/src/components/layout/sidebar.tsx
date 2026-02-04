@@ -14,10 +14,8 @@ import {
   FileText,
   Settings,
   ChevronLeft,
-  ChevronRight,
   ShoppingCart,
 } from 'lucide-react';
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 
 const navItems = [
@@ -35,7 +33,6 @@ const navItems = [
 
 export function Sidebar({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
-  const [collapsed, setCollapsed] = useState(false);
 
   const handleNavClick = () => {
     // Close sidebar on mobile when a nav item is clicked
@@ -45,29 +42,25 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
   };
 
   return (
-    <aside
-      className={cn(
-        'h-screen bg-black text-white transition-all duration-300 w-64 flex-shrink-0',
-        collapsed ? 'lg:w-16' : 'lg:w-64'
-      )}
-    >
+    <aside className="h-full bg-black text-white w-full">
       <div className="flex h-16 items-center justify-between px-4 border-b border-yellow-900/30">
-        {!collapsed && (
-          <Link href="/dashboard" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
-              <span className="text-black font-bold text-sm">B</span>
-            </div>
-            <span className="font-semibold text-lg text-yellow-400">BLESSCENT</span>
-          </Link>
+        <Link href="/dashboard" onClick={handleNavClick} className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
+            <span className="text-black font-bold text-sm">B</span>
+          </div>
+          <span className="font-semibold text-lg text-yellow-400">BLESSCENT</span>
+        </Link>
+        {/* Close button for mobile */}
+        {onClose && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onClose}
+            className="lg:hidden text-yellow-400/70 hover:text-yellow-400 hover:bg-yellow-400/10"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </Button>
         )}
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => setCollapsed(!collapsed)}
-          className="text-yellow-400/70 hover:text-yellow-400 hover:bg-yellow-400/10"
-        >
-          {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-        </Button>
       </div>
 
       <nav className="p-2 space-y-1">
@@ -88,7 +81,7 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
               )}
             >
               <Icon className="h-5 w-5 flex-shrink-0" />
-              {!collapsed && <span className="ml-3">{item.label}</span>}
+              <span className="ml-3">{item.label}</span>
             </Link>
           );
         })}

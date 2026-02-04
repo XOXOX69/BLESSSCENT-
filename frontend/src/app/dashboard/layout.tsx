@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Sidebar } from '@/components/layout/sidebar';
 import { Header } from '@/components/layout/header';
-import { Loader2, Menu, X } from 'lucide-react';
+import { Loader2, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function DashboardLayout({
@@ -41,7 +41,7 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-gray-50">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div 
@@ -50,31 +50,35 @@ export default function DashboardLayout({
         />
       )}
       
-      {/* Sidebar - fixed on mobile (slide in), static on desktop */}
-      <div className={`
-        fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 lg:flex-shrink-0
-        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+      {/* Sidebar - only visible on desktop OR when open on mobile */}
+      <aside className={`
+        fixed top-0 left-0 h-full w-64 z-50 bg-black
+        transform transition-transform duration-300 ease-in-out
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        lg:translate-x-0
       `}>
         <Sidebar onClose={() => setSidebarOpen(false)} />
-      </div>
+      </aside>
       
-      {/* Main content */}
-      <div className="flex-1 min-w-0">
+      {/* Main content - pushed right on desktop only */}
+      <div className="lg:pl-64">
         {/* Mobile header with menu button */}
-        <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-3">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="text-gray-600"
-          >
-            {sidebarOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
-              <span className="text-black text-sm font-bold">B</span>
+        <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setSidebarOpen(true)}
+              className="text-gray-600 h-10 w-10"
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
+                <span className="text-black text-sm font-bold">B</span>
+              </div>
+              <span className="font-semibold text-gray-800">BLESSCENT</span>
             </div>
-            <span className="font-semibold text-gray-800">BLESSCENT</span>
           </div>
         </div>
         
