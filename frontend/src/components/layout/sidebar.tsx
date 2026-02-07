@@ -44,12 +44,12 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
   return (
     <aside className="h-full bg-white w-full flex flex-col">
       {/* Logo Section */}
-      <div className="flex h-16 items-center justify-between px-5 border-b border-[#e4e6e8]">
+      <div className="flex h-16 items-center justify-between px-5 border-b border-[#fde68a]">
         <Link href="/dashboard" onClick={handleNavClick} className="flex items-center space-x-3">
-          <div className="w-9 h-9 bg-gradient-to-br from-[#7367f0] to-[#9e95f5] rounded-lg flex items-center justify-center shadow-md">
+          <div className="w-9 h-9 bg-gradient-to-br from-[#fbbf24] to-[#f59e0b] rounded-lg flex items-center justify-center shadow-md">
             <span className="text-white font-bold text-base">B</span>
           </div>
-          <span className="font-semibold text-xl text-[#5d596c]">BLESSCENT</span>
+          <span className="font-semibold text-xl text-[#78716c]">BLESSCENT</span>
         </Link>
         {/* Close button for mobile */}
         {onClose && (
@@ -57,7 +57,7 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
             variant="ghost"
             size="sm"
             onClick={onClose}
-            className="lg:hidden text-[#a5a3ae] hover:text-[#7367f0] hover:bg-[#7367f0]/10"
+            className="lg:hidden text-[#a8a29e] hover:text-[#f59e0b] hover:bg-[#f59e0b]/10"
           >
             <ChevronLeft className="h-5 w-5" />
           </Button>
@@ -78,11 +78,11 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
               className={cn(
                 'flex items-center px-4 py-2.5 rounded-lg transition-all duration-200 text-[15px]',
                 isActive
-                  ? 'bg-gradient-to-r from-[#7367f0] to-[#9e95f5] text-white font-medium shadow-lg shadow-[#7367f0]/30'
-                  : 'text-[#6f6b7d] hover:text-[#7367f0] hover:bg-[#7367f0]/8'
+                  ? 'bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] text-white font-medium shadow-lg shadow-[#f59e0b]/30'
+                  : 'text-[#78716c] hover:text-[#f59e0b] hover:bg-[#f59e0b]/8'
               )}
             >
-              <Icon className={cn("h-5 w-5 shrink-0", isActive ? "text-white" : "text-[#a5a3ae]")} />
+              <Icon className={cn("h-5 w-5 shrink-0", isActive ? "text-white" : "text-[#a8a29e]")} />
               <span className="ml-3">{item.label}</span>
             </Link>
           );
@@ -90,8 +90,8 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-[#e4e6e8]">
-        <div className="text-xs text-[#a5a3ae] text-center">
+      <div className="p-4 border-t border-[#fde68a]">
+        <div className="text-xs text-[#a8a29e] text-center">
           © 2025 Blesscent
         </div>
       </div>

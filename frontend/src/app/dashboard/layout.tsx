@@ -25,12 +25,12 @@ export default function DashboardLayout({
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f8f7fa]">
+      <div className="min-h-screen flex items-center justify-center bg-[#fffbeb]">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-[#7367f0] to-[#9e95f5] rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse shadow-lg shadow-[#7367f0]/30">
+          <div className="w-16 h-16 bg-gradient-to-br from-[#fbbf24] to-[#f59e0b] rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse shadow-lg shadow-[#f59e0b]/30">
             <span className="text-white text-2xl font-black">B</span>
           </div>
-          <Loader2 className="h-6 w-6 animate-spin text-[#7367f0] mx-auto" />
+          <Loader2 className="h-6 w-6 animate-spin text-[#f59e0b] mx-auto" />
         </div>
       </div>
     );
@@ -41,7 +41,7 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-[#f8f7fa]">
+    <div className="min-h-screen bg-[#fffbeb]">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div 
@@ -50,7 +50,7 @@ export default function DashboardLayout({
         />
       )}
       
-      {/* Sidebar - Sneat style white sidebar */}
+      {/* Sidebar - Light yellow style */}
       <aside className={`
         fixed top-0 left-0 h-full w-[260px] z-50
         bg-white shadow-sneat-lg
@@ -64,21 +64,21 @@ export default function DashboardLayout({
       {/* Main content - pushed right on desktop only */}
       <div className="lg:pl-[260px]">
         {/* Mobile header with menu button */}
-        <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-[#e4e6e8] px-4 py-3 flex items-center justify-between shadow-sneat">
+        <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-[#fde68a] px-4 py-3 flex items-center justify-between shadow-sneat">
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setSidebarOpen(true)}
-              className="text-[#5d596c] h-10 w-10 hover:bg-[#f8f7fa]"
+              className="text-[#78716c] h-10 w-10 hover:bg-[#fffbeb]"
             >
               <Menu className="h-6 w-6" />
             </Button>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-[#7367f0] to-[#9e95f5] rounded-lg flex items-center justify-center shadow-sm">
+              <div className="w-8 h-8 bg-gradient-to-br from-[#fbbf24] to-[#f59e0b] rounded-lg flex items-center justify-center shadow-sm">
                 <span className="text-white text-sm font-bold">B</span>
               </div>
-              <span className="font-semibold text-[#5d596c]">BLESSCENT</span>
+              <span className="font-semibold text-[#78716c]">BLESSCENT</span>
             </div>
           </div>
         </div>

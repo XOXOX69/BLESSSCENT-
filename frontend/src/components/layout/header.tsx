@@ -174,9 +174,9 @@ export function Header() {
     : 'U';
 
   return (
-    <header className="sticky top-0 z-30 h-16 bg-white border-b border-[#e4e6e8] flex items-center justify-between px-4 sm:px-6 shadow-sneat">
+    <header className="sticky top-0 z-30 h-16 bg-white border-b border-[#fde68a] flex items-center justify-between px-4 sm:px-6 shadow-sneat">
       <div className="flex items-center space-x-4">
-        <h1 className="text-lg sm:text-xl font-semibold text-[#5d596c] truncate">
+        <h1 className="text-lg sm:text-xl font-semibold text-[#78716c] truncate">
           Welcome back, {user?.firstName || 'User'}
         </h1>
       </div>
@@ -185,23 +185,23 @@ export function Header() {
         {/* Notifications */}
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="ghost" size="icon" className="relative h-10 w-10 hover:bg-[#7367f0]/10 text-[#6f6b7d]">
+            <Button variant="ghost" size="icon" className="relative h-10 w-10 hover:bg-[#f59e0b]/10 text-[#78716c]">
               <Bell className="h-5 w-5" />
               {unreadCount > 0 && (
-                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-[#7367f0] text-white border-2 border-white shadow-md">
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-[#f59e0b] text-white border-2 border-white shadow-md">
                   {unreadCount > 9 ? '9+' : unreadCount}
                 </Badge>
               )}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-80 sm:w-96 p-0 bg-white border-[#e4e6e8] shadow-sneat-lg" align="end">
-            <div className="flex items-center justify-between p-4 border-b border-[#e4e6e8]">
-              <h3 className="font-semibold text-[#5d596c]">Notifications</h3>
+          <PopoverContent className="w-80 sm:w-96 p-0 bg-white border-[#fde68a] shadow-sneat-lg" align="end">
+            <div className="flex items-center justify-between p-4 border-b border-[#fde68a]">
+              <h3 className="font-semibold text-[#78716c]">Notifications</h3>
               {unreadCount > 0 && (
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="text-xs text-[#7367f0] hover:text-[#5f55e4] hover:bg-[#7367f0]/10"
+                  className="text-xs text-[#f59e0b] hover:text-[#d97706] hover:bg-[#f59e0b]/10"
                   onClick={markAllAsRead}
                 >
                   <Check className="h-3 w-3 mr-1" />
@@ -223,33 +223,33 @@ export function Header() {
                       key={notification.id}
                       href={notification.link || '#'}
                       onClick={() => markAsRead(notification.id)}
-                      className={`flex items-start gap-3 p-4 hover:bg-[#f8f7fa] transition-colors ${
-                        !notification.read ? 'bg-[#7367f0]/5' : ''
+                      className={`flex items-start gap-3 p-4 hover:bg-[#fffbeb] transition-colors ${
+                        !notification.read ? 'bg-[#f59e0b]/5' : ''
                       }`}
                     >
                       <div className="shrink-0 mt-0.5">
                         <div className={`h-8 w-8 rounded-lg flex items-center justify-center ${
-                          notification.type === 'low_stock' ? 'bg-[#ff9f43]/10' :
-                          notification.type === 'overdue' ? 'bg-[#ea5455]/10' :
-                          notification.type === 'new_member' ? 'bg-[#00cfe8]/10' :
-                          'bg-[#7367f0]/10'
+                          notification.type === 'low_stock' ? 'bg-[#f97316]/10' :
+                          notification.type === 'overdue' ? 'bg-[#ef4444]/10' :
+                          notification.type === 'new_member' ? 'bg-[#0ea5e9]/10' :
+                          'bg-[#f59e0b]/10'
                         }`}>
                           {getNotificationIcon(notification.type)}
                         </div>
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between">
-                          <p className="text-sm font-medium text-[#5d596c] truncate">
+                          <p className="text-sm font-medium text-[#78716c] truncate">
                             {notification.title}
                           </p>
                           {!notification.read && (
-                            <span className="h-2 w-2 bg-[#7367f0] rounded-full shrink-0" />
+                            <span className="h-2 w-2 bg-[#f59e0b] rounded-full shrink-0" />
                           )}
                         </div>
-                        <p className="text-sm text-[#6f6b7d] line-clamp-2">
+                        <p className="text-sm text-[#a8a29e] line-clamp-2">
                           {notification.message}
                         </p>
-                        <p className="text-xs text-[#a5a3ae] mt-1">
+                        <p className="text-xs text-[#a8a29e] mt-1">
                           {notification.time}
                         </p>
                       </div>
@@ -258,9 +258,9 @@ export function Header() {
                 </div>
               )}
             </ScrollArea>
-            <div className="p-3 border-t border-[#e4e6e8] bg-[#f8f7fa]">
+            <div className="p-3 border-t border-[#fde68a] bg-[#fffbeb]">
               <Link href="/dashboard/reports" className="block">
-                <Button variant="outline" size="sm" className="w-full text-sm border-[#7367f0] text-[#7367f0] hover:bg-[#7367f0] hover:text-white">
+                <Button variant="outline" size="sm" className="w-full text-sm border-[#f59e0b] text-[#f59e0b] hover:bg-[#f59e0b] hover:text-white">
                   View All Reports
                 </Button>
               </Link>
@@ -271,9 +271,9 @@ export function Header() {
         {/* User Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="relative h-10 w-10 rounded-full hover:bg-[#7367f0]/10">
+            <Button variant="ghost" className="relative h-10 w-10 rounded-full hover:bg-[#f59e0b]/10">
               <Avatar className="h-10 w-10">
-                <AvatarFallback className="bg-gradient-to-br from-[#7367f0] to-[#9e95f5] text-white font-semibold">
+                <AvatarFallback className="bg-gradient-to-br from-[#fbbf24] to-[#f59e0b] text-white font-semibold">
                   {initials}
                 </AvatarFallback>
               </Avatar>

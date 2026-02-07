@@ -10,32 +10,32 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 
-          "bg-gradient-to-r from-[#7367f0] to-[#9e95f5] text-white font-semibold shadow-lg shadow-[#7367f0]/25 hover:shadow-xl hover:shadow-[#7367f0]/40 hover:scale-[1.02] active:scale-[0.98] hover:from-[#8579f2] hover:to-[#aea6f7]",
+          "bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] text-white font-semibold shadow-lg shadow-[#f59e0b]/25 hover:shadow-xl hover:shadow-[#f59e0b]/40 hover:scale-[1.02] active:scale-[0.98] hover:from-[#fcd34d] hover:to-[#fbbf24]",
         destructive:
-          "bg-gradient-to-r from-[#ea5455] to-[#f08182] text-white font-semibold shadow-lg shadow-[#ea5455]/25 hover:shadow-xl hover:shadow-[#ea5455]/40 hover:scale-[1.02] active:scale-[0.98]",
+          "bg-gradient-to-r from-[#ef4444] to-[#f87171] text-white font-semibold shadow-lg shadow-[#ef4444]/25 hover:shadow-xl hover:shadow-[#ef4444]/40 hover:scale-[1.02] active:scale-[0.98]",
         outline:
-          "border-2 border-[#7367f0]/50 bg-transparent text-[#7367f0] hover:bg-[#7367f0]/10 hover:border-[#7367f0] hover:shadow-lg hover:shadow-[#7367f0]/20 active:scale-[0.98]",
+          "border-2 border-[#f59e0b]/50 bg-transparent text-[#f59e0b] hover:bg-[#f59e0b]/10 hover:border-[#f59e0b] hover:shadow-lg hover:shadow-[#f59e0b]/20 active:scale-[0.98]",
         secondary:
-          "bg-[#f8f7fa] text-[#5d596c] hover:bg-[#eeedf0] shadow-sm hover:shadow-md active:scale-[0.98]",
+          "bg-[#fffbeb] text-[#78716c] hover:bg-[#fef3c7] shadow-sm hover:shadow-md active:scale-[0.98]",
         ghost:
-          "hover:bg-[#7367f0]/10 hover:text-[#7367f0] active:scale-[0.98]",
+          "hover:bg-[#f59e0b]/10 hover:text-[#f59e0b] active:scale-[0.98]",
         link: 
-          "text-[#7367f0] underline-offset-4 hover:underline hover:text-[#5f55e4]",
+          "text-[#f59e0b] underline-offset-4 hover:underline hover:text-[#d97706]",
         // New fancy variants
         glow:
-          "bg-gradient-to-r from-[#7367f0] to-[#9e95f5] text-white font-semibold relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700 shadow-lg shadow-[#7367f0]/30 hover:shadow-xl hover:shadow-[#7367f0]/50 active:scale-[0.98]",
+          "bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] text-white font-semibold relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700 shadow-lg shadow-[#f59e0b]/30 hover:shadow-xl hover:shadow-[#f59e0b]/50 active:scale-[0.98]",
         shine:
-          "bg-white text-[#7367f0] font-semibold border border-[#7367f0]/30 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-[#7367f0]/20 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-500 hover:border-[#7367f0]/60 hover:shadow-lg hover:shadow-[#7367f0]/20 active:scale-[0.98]",
+          "bg-white text-[#f59e0b] font-semibold border border-[#f59e0b]/30 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-[#f59e0b]/20 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-500 hover:border-[#f59e0b]/60 hover:shadow-lg hover:shadow-[#f59e0b]/20 active:scale-[0.98]",
         glass:
-          "bg-white/80 backdrop-blur-md border border-[#e4e6e8] text-[#5d596c] hover:bg-white hover:shadow-sneat active:scale-[0.98]",
+          "bg-white/80 backdrop-blur-md border border-[#fde68a] text-[#78716c] hover:bg-white hover:shadow-sneat active:scale-[0.98]",
         neon:
-          "bg-transparent border-2 border-[#7367f0] text-[#7367f0] font-semibold shadow-[0_0_15px_rgba(115,103,240,0.3)] hover:shadow-[0_0_25px_rgba(115,103,240,0.5),0_0_50px_rgba(115,103,240,0.3)] hover:bg-[#7367f0]/10 active:scale-[0.98] transition-all duration-300",
+          "bg-transparent border-2 border-[#f59e0b] text-[#f59e0b] font-semibold shadow-[0_0_15px_rgba(245,158,11,0.3)] hover:shadow-[0_0_25px_rgba(245,158,11,0.5),0_0_50px_rgba(245,158,11,0.3)] hover:bg-[#f59e0b]/10 active:scale-[0.98] transition-all duration-300",
         gradient:
-          "bg-gradient-to-r from-[#7367f0] via-[#9e95f5] to-[#00cfe8] bg-[length:200%_100%] text-white font-semibold animate-gradient-x hover:shadow-xl hover:shadow-[#7367f0]/30 active:scale-[0.98]",
+          "bg-gradient-to-r from-[#fbbf24] via-[#f59e0b] to-[#f97316] bg-[length:200%_100%] text-white font-semibold animate-gradient-x hover:shadow-xl hover:shadow-[#f59e0b]/30 active:scale-[0.98]",
         pulse:
-          "bg-gradient-to-r from-[#7367f0] to-[#9e95f5] text-white font-semibold shadow-lg shadow-[#7367f0]/30 hover:animate-pulse active:scale-[0.98]",
+          "bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] text-white font-semibold shadow-lg shadow-[#f59e0b]/30 hover:animate-pulse active:scale-[0.98]",
         slideBg:
-          "relative overflow-hidden bg-transparent border-2 border-[#7367f0] text-[#7367f0] font-semibold before:absolute before:inset-0 before:bg-gradient-to-r before:from-[#7367f0] before:to-[#9e95f5] before:translate-y-full hover:before:translate-y-0 before:transition-transform before:duration-300 hover:text-white [&>*]:relative [&>*]:z-10 active:scale-[0.98]",
+          "relative overflow-hidden bg-transparent border-2 border-[#f59e0b] text-[#f59e0b] font-semibold before:absolute before:inset-0 before:bg-gradient-to-r before:from-[#fbbf24] before:to-[#f59e0b] before:translate-y-full hover:before:translate-y-0 before:transition-transform before:duration-300 hover:text-white [&>*]:relative [&>*]:z-10 active:scale-[0.98]",
       },
       size: {
         default: "h-10 px-5 py-2 has-[>svg]:px-4",

@@ -48,42 +48,42 @@
 
 :root {
   --radius: 0.5rem;
-  /* Sneat-inspired color palette */
-  --background: #f8f7fa;
-  --foreground: #5d596c;
+  /* Light Yellow color palette */
+  --background: #fffbeb;
+  --foreground: #78716c;
   --card: #ffffff;
-  --card-foreground: #5d596c;
+  --card-foreground: #57534e;
   --popover: #ffffff;
-  --popover-foreground: #5d596c;
-  --primary: #7367f0;
+  --popover-foreground: #57534e;
+  --primary: #f59e0b;
   --primary-foreground: #ffffff;
-  --secondary: #a8aaae;
+  --secondary: #a8a29e;
   --secondary-foreground: #ffffff;
-  --muted: #f1f0f2;
-  --muted-foreground: #a5a3ae;
-  --accent: #7367f0;
+  --muted: #fef3c7;
+  --muted-foreground: #a8a29e;
+  --accent: #f59e0b;
   --accent-foreground: #ffffff;
-  --destructive: #ea5455;
-  --border: #e4e6e8;
-  --input: #e4e6e8;
-  --ring: #7367f0;
-  /* Sneat additional colors */
-  --success: #28c76f;
-  --warning: #ff9f43;
-  --info: #00cfe8;
-  --chart-1: #7367f0;
-  --chart-2: #28c76f;
-  --chart-3: #ff9f43;
-  --chart-4: #00cfe8;
-  --chart-5: #ea5455;
+  --destructive: #ef4444;
+  --border: #fde68a;
+  --input: #fde68a;
+  --ring: #f59e0b;
+  /* Additional colors */
+  --success: #22c55e;
+  --warning: #f97316;
+  --info: #0ea5e9;
+  --chart-1: #f59e0b;
+  --chart-2: #22c55e;
+  --chart-3: #f97316;
+  --chart-4: #0ea5e9;
+  --chart-5: #ef4444;
   --sidebar: #ffffff;
-  --sidebar-foreground: #5d596c;
-  --sidebar-primary: #7367f0;
+  --sidebar-foreground: #78716c;
+  --sidebar-primary: #f59e0b;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f8f7fa;
-  --sidebar-accent-foreground: #5d596c;
-  --sidebar-border: #e4e6e8;
-  --sidebar-ring: #7367f0;
+  --sidebar-accent: #fffbeb;
+  --sidebar-accent-foreground: #78716c;
+  --sidebar-border: #fde68a;
+  --sidebar-ring: #f59e0b;
 }
 
 .dark {
@@ -173,10 +173,10 @@
 
 @keyframes glow-pulse {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(115, 103, 240, 0.4);
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
   }
   50% {
-    box-shadow: 0 0 30px rgba(115, 103, 240, 0.6), 0 0 60px rgba(115, 103, 240, 0.3);
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.6), 0 0 60px rgba(245, 158, 11, 0.3);
   }
 }
 
