@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { resellersApi } from '@/lib/api';
 import { Button } from '@/components/ui/button';
@@ -35,6 +35,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Search,
   Plus,
@@ -45,6 +46,8 @@ import {
   Trash,
   DollarSign,
   AlertTriangle,
+  Upload,
+  X,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
@@ -58,6 +61,8 @@ export default function ResellersPage() {
   const [selectedReseller, setSelectedReseller] = useState<any>(null);
   const [creditAmount, setCreditAmount] = useState(0);
   const [creditNote, setCreditNote] = useState('');
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const queryClient = useQueryClient();
 
   const [form, setForm] = useState({
@@ -68,6 +73,7 @@ export default function ResellersPage() {
     address: '',
     creditLimit: 0,
     priceProfileId: '',
+    imageUrl: '',
   });
 
   const { data, isLoading } = useQuery({
@@ -127,8 +133,10 @@ export default function ResellersPage() {
       address: '',
       creditLimit: 0,
       priceProfileId: '',
+      imageUrl: '',
     });
     setEditReseller(null);
+    setImagePreview(null);
   };
 
   const handleEdit = (reseller: any) => {
@@ -141,8 +149,31 @@ export default function ResellersPage() {
       address: reseller.address || '',
       creditLimit: reseller.creditLimit || 0,
       priceProfileId: reseller.priceProfileId || '',
+      imageUrl: reseller.imageUrl || '',
     });
+    setImagePreview(reseller.imageUrl || null);
     setShowDialog(true);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setImagePreview(base64String);
+        setForm({ ...form, imageUrl: base64String });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setImagePreview(null);
+    setForm({ ...form, imageUrl: '' });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   const handleCreditAdjust = (reseller: any) => {
@@ -271,9 +302,19 @@ export default function ResellersPage() {
                   return (
                     <TableRow key={reseller.id}>
                       <TableCell>
-                        <div className="font-medium">{reseller.name}</div>
-                        <div className="text-sm text-muted-foreground font-mono">
-                          {reseller.resellerCode}
+                        <div className="flex items-center gap-3">
+                          <Avatar className="h-10 w-10">
+                            <AvatarImage src={reseller.imageUrl} alt={reseller.name} />
+                            <AvatarFallback className="bg-blue-100 text-blue-700 font-semibold">
+                              {reseller.name?.[0] || 'R'}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <div className="font-medium">{reseller.name}</div>
+                            <div className="text-sm text-muted-foreground font-mono">
+                              {reseller.resellerCode}
+                            </div>
+                          </div>
                         </div>
                       </TableCell>
                       <TableCell>
@@ -380,6 +421,46 @@ export default function ResellersPage() {
             }}
             className="space-y-4"
           >
+            {/* Image Upload */}
+            <div className="flex flex-col items-center space-y-3">
+              <div className="relative">
+                <Avatar className="h-24 w-24 border-2 border-dashed border-gray-300">
+                  <AvatarImage src={imagePreview || undefined} alt="Reseller photo" />
+                  <AvatarFallback className="bg-gray-50 text-gray-400">
+                    <Building2 className="h-8 w-8" />
+                  </AvatarFallback>
+                </Avatar>
+                {imagePreview && (
+                  <button
+                    type="button"
+                    onClick={removeImage}
+                    className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="hidden"
+                  id="reseller-image"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <Upload className="mr-2 h-4 w-4" />
+                  Upload Photo
+                </Button>
+              </div>
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="name">Business Name *</Label>
               <Input

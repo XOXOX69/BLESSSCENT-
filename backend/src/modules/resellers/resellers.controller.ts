@@ -99,6 +99,18 @@ export class ResellersController {
     return this.resellersService.getWithOutstandingBalance(branchId);
   }
 
+  @Get('top')
+  @Roles(UserRole.ADMIN, UserRole.MANAGER, UserRole.CASHIER)
+  @ApiOperation({ summary: 'Get top resellers by total purchases' })
+  @ApiQuery({ name: 'limit', required: false, description: 'Number of top resellers to return (default: 3)' })
+  @ApiQuery({ name: 'branchId', required: false })
+  async getTopResellers(
+    @Query('limit') limit?: number,
+    @Query('branchId') branchId?: string,
+  ) {
+    return this.resellersService.getTopResellers(limit ? Number(limit) : 3, branchId);
+  }
+
   @Post('lookup')
   @Roles(UserRole.ADMIN, UserRole.MANAGER, UserRole.CASHIER)
   @ApiOperation({ summary: 'Lookup reseller by code, phone, or email (for POS)' })

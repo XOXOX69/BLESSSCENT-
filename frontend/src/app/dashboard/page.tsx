@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { dashboardApi } from '@/lib/api';
+import { dashboardApi, resellersApi } from '@/lib/api';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   DollarSign,
@@ -14,8 +14,12 @@ import {
   ArrowUpRight,
   ArrowDownRight,
   Sparkles,
+  Trophy,
+  Medal,
+  Award,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   LineChart,
   Line,
@@ -122,6 +126,14 @@ export default function DashboardPage() {
     queryKey: ['dashboard'],
     queryFn: async () => {
       const response = await dashboardApi.getSummary();
+      return response.data;
+    },
+  });
+
+  const { data: topResellers, isLoading: loadingResellers } = useQuery({
+    queryKey: ['topResellers'],
+    queryFn: async () => {
+      const response = await resellersApi.getTopResellers(3);
       return response.data;
     },
   });
@@ -317,6 +329,115 @@ export default function DashboardPage() {
           variant="info"
         />
       </div>
+
+      {/* Top 3 Resellers Section */}
+      <Card className="border-0 shadow-sm">
+        <CardHeader className="pb-2">
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2 text-base font-semibold">
+              <Trophy className="h-5 w-5 text-yellow-500" />
+              Top Resellers
+            </CardTitle>
+            <Badge variant="secondary" className="text-xs">By Total Purchases</Badge>
+          </div>
+        </CardHeader>
+        <CardContent>
+          {loadingResellers ? (
+            <div className="flex justify-center gap-8 py-8">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="flex flex-col items-center animate-pulse">
+                  <div className="w-20 h-20 rounded-full bg-gray-200 mb-3" />
+                  <div className="h-4 w-24 bg-gray-200 rounded mb-2" />
+                  <div className="h-3 w-16 bg-gray-100 rounded" />
+                </div>
+              ))}
+            </div>
+          ) : topResellers && topResellers.length > 0 ? (
+            <div className="flex flex-col sm:flex-row justify-center items-center sm:items-end gap-8 py-4">
+              {/* Second Place */}
+              {topResellers[1] && (
+                <div className="flex flex-col items-center order-1 sm:order-1">
+                  <div className="relative mb-3">
+                    <Avatar className="w-16 h-16 border-4 border-gray-300 shadow-lg">
+                      <AvatarImage src={topResellers[1].imageUrl} alt={topResellers[1].company} />
+                      <AvatarFallback className="bg-gray-100 text-gray-600 text-lg font-bold">
+                        {topResellers[1].company?.[0] || 'R'}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="absolute -bottom-1 -right-1 bg-gray-400 rounded-full p-1">
+                      <Medal className="h-4 w-4 text-white" />
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <p className="font-semibold text-gray-900 text-sm truncate max-w-[120px]">{topResellers[1].company}</p>
+                    <p className="text-xs text-gray-500">{topResellers[1].contactPerson}</p>
+                    <p className="text-sm font-bold text-gray-600 mt-1">
+                      {formatCurrency(topResellers[1].totalPurchases || 0)}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* First Place */}
+              {topResellers[0] && (
+                <div className="flex flex-col items-center order-0 sm:order-2">
+                  <div className="relative mb-3">
+                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                      <Trophy className="h-6 w-6 text-yellow-500" />
+                    </div>
+                    <Avatar className="w-24 h-24 border-4 border-yellow-400 shadow-xl ring-4 ring-yellow-100">
+                      <AvatarImage src={topResellers[0].imageUrl} alt={topResellers[0].company} />
+                      <AvatarFallback className="bg-yellow-50 text-yellow-700 text-2xl font-bold">
+                        {topResellers[0].company?.[0] || 'R'}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="absolute -bottom-1 -right-1 bg-yellow-500 rounded-full p-1.5">
+                      <Award className="h-5 w-5 text-white" />
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <Badge className="mb-1 bg-yellow-100 text-yellow-700 hover:bg-yellow-100">#1 Top Seller</Badge>
+                    <p className="font-bold text-gray-900 truncate max-w-[140px]">{topResellers[0].company}</p>
+                    <p className="text-sm text-gray-500">{topResellers[0].contactPerson}</p>
+                    <p className="text-lg font-bold text-yellow-600 mt-1">
+                      {formatCurrency(topResellers[0].totalPurchases || 0)}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Third Place */}
+              {topResellers[2] && (
+                <div className="flex flex-col items-center order-2 sm:order-3">
+                  <div className="relative mb-3">
+                    <Avatar className="w-14 h-14 border-4 border-orange-300 shadow-lg">
+                      <AvatarImage src={topResellers[2].imageUrl} alt={topResellers[2].company} />
+                      <AvatarFallback className="bg-orange-50 text-orange-600 text-lg font-bold">
+                        {topResellers[2].company?.[0] || 'R'}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="absolute -bottom-1 -right-1 bg-orange-400 rounded-full p-1">
+                      <Medal className="h-3 w-3 text-white" />
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <p className="font-semibold text-gray-900 text-sm truncate max-w-[100px]">{topResellers[2].company}</p>
+                    <p className="text-xs text-gray-500">{topResellers[2].contactPerson}</p>
+                    <p className="text-sm font-bold text-orange-600 mt-1">
+                      {formatCurrency(topResellers[2].totalPurchases || 0)}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center py-8 text-gray-500">
+              <Trophy className="h-12 w-12 mb-2 opacity-30" />
+              <p className="text-sm">No reseller data available yet</p>
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }

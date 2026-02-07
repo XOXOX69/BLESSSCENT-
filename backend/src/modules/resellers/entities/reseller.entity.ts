@@ -74,6 +74,9 @@ export class Reseller {
   @Column({ nullable: true })
   notes: string;
 
+  @Column({ nullable: true, name: 'image_url' })
+  imageUrl: string;
+
   @OneToMany('Sale', 'reseller')
   sales: any[];
 

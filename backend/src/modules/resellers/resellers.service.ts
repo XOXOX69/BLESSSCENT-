@@ -405,4 +405,23 @@ export class ResellersService {
       }, {}),
     };
   }
+
+  /**
+   * Get top resellers by total purchases
+   */
+  async getTopResellers(limit: number = 3, branchId?: string): Promise<Reseller[]> {
+    const queryBuilder = this.resellerRepository.createQueryBuilder('reseller');
+
+    queryBuilder.where('reseller.status = :status', { status: ResellerStatus.ACTIVE });
+
+    if (branchId) {
+      queryBuilder.andWhere('reseller.branchId = :branchId', { branchId });
+    }
+
+    return queryBuilder
+      .leftJoinAndSelect('reseller.branch', 'branch')
+      .orderBy('reseller.totalPurchases', 'DESC')
+      .take(limit)
+      .getMany();
+  }
 }

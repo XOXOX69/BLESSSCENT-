@@ -96,6 +96,11 @@ export class CreateResellerDto {
   @IsOptional()
   @IsString()
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Profile image URL' })
+  @IsOptional()
+  @IsString()
+  imageUrl?: string;
 }
 
 export class UpdateResellerDto extends PartialType(CreateResellerDto) {

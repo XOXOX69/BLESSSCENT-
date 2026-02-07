@@ -147,6 +147,8 @@ export const resellersApi = {
   getStatistics: (branchId?: string) =>
     api.get('/resellers/statistics', { params: { branchId } }),
   getOutstandingBalance: () => api.get('/resellers/outstanding-balance'),
+  getTopResellers: (limit?: number, branchId?: string) =>
+    api.get('/resellers/top', { params: { limit, branchId } }),
 };
 
 // Ledger API

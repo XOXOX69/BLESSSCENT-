@@ -72,6 +72,11 @@ export class CreateMemberDto {
   @IsOptional()
   @IsString()
   registeredBy?: string;
+
+  @ApiPropertyOptional({ description: 'Profile image URL' })
+  @IsOptional()
+  @IsString()
+  imageUrl?: string;
 }
 
 export class UpdateMemberDto extends PartialType(CreateMemberDto) {

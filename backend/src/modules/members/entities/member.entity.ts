@@ -68,6 +68,9 @@ export class Member {
   @Column({ nullable: true })
   notes: string;
 
+  @Column({ nullable: true, name: 'image_url' })
+  imageUrl: string;
+
   @OneToMany('Sale', 'member')
   sales: any[];
 

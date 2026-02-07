@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { membersApi } from '@/lib/api';
 import { Button } from '@/components/ui/button';
@@ -28,7 +28,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Search, Plus, MoreHorizontal, Users, Star, Edit, Trash, Gift } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Search, Plus, MoreHorizontal, Users, Star, Edit, Trash, Gift, Upload, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
 
@@ -41,6 +42,8 @@ export default function MembersPage() {
   const [selectedMember, setSelectedMember] = useState<any>(null);
   const [pointsAdjustment, setPointsAdjustment] = useState(0);
   const [pointsReason, setPointsReason] = useState('');
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const queryClient = useQueryClient();
 
   const [form, setForm] = useState({
@@ -48,6 +51,7 @@ export default function MembersPage() {
     lastName: '',
     phone: '',
     email: '',
+    imageUrl: '',
   });
 
   const { data, isLoading } = useQuery({
@@ -99,8 +103,9 @@ export default function MembersPage() {
   });
 
   const resetForm = () => {
-    setForm({ firstName: '', lastName: '', phone: '', email: '' });
+    setForm({ firstName: '', lastName: '', phone: '', email: '', imageUrl: '' });
     setEditMember(null);
+    setImagePreview(null);
   };
 
   const handleEdit = (member: any) => {
@@ -110,8 +115,32 @@ export default function MembersPage() {
       lastName: member.lastName || '',
       phone: member.phone || '',
       email: member.email || '',
+      imageUrl: member.imageUrl || '',
     });
+    setImagePreview(member.imageUrl || null);
     setShowDialog(true);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // For demo purposes, we'll use a data URL. In production, upload to a cloud service.
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setImagePreview(base64String);
+        setForm({ ...form, imageUrl: base64String });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setImagePreview(null);
+    setForm({ ...form, imageUrl: '' });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   const handlePointsAdjust = (member: any) => {
@@ -225,9 +254,19 @@ export default function MembersPage() {
                   return (
                     <TableRow key={member.id}>
                       <TableCell>
-                        <div className="font-medium">{member.firstName} {member.lastName}</div>
-                        <div className="text-sm text-muted-foreground font-mono">
-                          {member.memberCode}
+                        <div className="flex items-center gap-3">
+                          <Avatar className="h-10 w-10">
+                            <AvatarImage src={member.imageUrl} alt={`${member.firstName} ${member.lastName}`} />
+                            <AvatarFallback className="bg-yellow-100 text-yellow-700 font-semibold">
+                              {member.firstName?.[0]}{member.lastName?.[0]}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <div className="font-medium">{member.firstName} {member.lastName}</div>
+                            <div className="text-sm text-muted-foreground font-mono">
+                              {member.memberCode}
+                            </div>
+                          </div>
                         </div>
                       </TableCell>
                       <TableCell>
@@ -327,6 +366,46 @@ export default function MembersPage() {
             }}
             className="space-y-4"
           >
+            {/* Image Upload */}
+            <div className="flex flex-col items-center space-y-3">
+              <div className="relative">
+                <Avatar className="h-24 w-24 border-2 border-dashed border-gray-300">
+                  <AvatarImage src={imagePreview || undefined} alt="Member photo" />
+                  <AvatarFallback className="bg-gray-50 text-gray-400">
+                    <Users className="h-8 w-8" />
+                  </AvatarFallback>
+                </Avatar>
+                {imagePreview && (
+                  <button
+                    type="button"
+                    onClick={removeImage}
+                    className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="hidden"
+                  id="member-image"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <Upload className="mr-2 h-4 w-4" />
+                  Upload Photo
+                </Button>
+              </div>
+            </div>
+
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="firstName">First Name *</Label>
