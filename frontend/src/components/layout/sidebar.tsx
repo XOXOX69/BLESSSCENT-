@@ -42,13 +42,14 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
   };
 
   return (
-    <aside className="h-full bg-gradient-to-b from-black via-gray-900 to-black text-white w-full">
-      <div className="flex h-16 items-center justify-between px-4 border-b border-yellow-500/20 bg-yellow-500/5">
-        <Link href="/dashboard" onClick={handleNavClick} className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-linear-to-r from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
-            <span className="text-black font-bold text-sm">B</span>
+    <aside className="h-full bg-white w-full flex flex-col">
+      {/* Logo Section */}
+      <div className="flex h-16 items-center justify-between px-5 border-b border-[#e4e6e8]">
+        <Link href="/dashboard" onClick={handleNavClick} className="flex items-center space-x-3">
+          <div className="w-9 h-9 bg-gradient-to-br from-[#7367f0] to-[#9e95f5] rounded-lg flex items-center justify-center shadow-md">
+            <span className="text-white font-bold text-base">B</span>
           </div>
-          <span className="font-semibold text-lg text-yellow-400">BLESSCENT</span>
+          <span className="font-semibold text-xl text-[#5d596c]">BLESSCENT</span>
         </Link>
         {/* Close button for mobile */}
         {onClose && (
@@ -56,14 +57,15 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
             variant="ghost"
             size="sm"
             onClick={onClose}
-            className="lg:hidden text-yellow-400/70 hover:text-yellow-400 hover:bg-yellow-400/10"
+            className="lg:hidden text-[#a5a3ae] hover:text-[#7367f0] hover:bg-[#7367f0]/10"
           >
             <ChevronLeft className="h-5 w-5" />
           </Button>
         )}
       </div>
 
-      <nav className="p-3 space-y-1">
+      {/* Navigation */}
+      <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -74,18 +76,25 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
               href={item.href}
               onClick={handleNavClick}
               className={cn(
-                'flex items-center px-3 py-2.5 rounded-xl transition-all duration-200',
+                'flex items-center px-4 py-2.5 rounded-lg transition-all duration-200 text-[15px]',
                 isActive
-                  ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-medium shadow-lg shadow-yellow-500/25'
-                  : 'text-gray-400 hover:text-yellow-400 hover:bg-white/5 hover:backdrop-blur-sm'
+                  ? 'bg-gradient-to-r from-[#7367f0] to-[#9e95f5] text-white font-medium shadow-lg shadow-[#7367f0]/30'
+                  : 'text-[#6f6b7d] hover:text-[#7367f0] hover:bg-[#7367f0]/8'
               )}
             >
-              <Icon className="h-5 w-5 shrink-0" />
+              <Icon className={cn("h-5 w-5 shrink-0", isActive ? "text-white" : "text-[#a5a3ae]")} />
               <span className="ml-3">{item.label}</span>
             </Link>
           );
         })}
       </nav>
+
+      {/* Footer */}
+      <div className="p-4 border-t border-[#e4e6e8]">
+        <div className="text-xs text-[#a5a3ae] text-center">
+          © 2025 Blesscent
+        </div>
+      </div>
     </aside>
   );
 }

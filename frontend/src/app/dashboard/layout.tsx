@@ -25,12 +25,12 @@ export default function DashboardLayout({
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-[#f8f7fa]">
         <div className="text-center">
-          <div className="w-16 h-16 bg-linear-to-br from-yellow-400 to-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse">
-            <span className="text-black text-2xl font-black">B</span>
+          <div className="w-16 h-16 bg-gradient-to-br from-[#7367f0] to-[#9e95f5] rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse shadow-lg shadow-[#7367f0]/30">
+            <span className="text-white text-2xl font-black">B</span>
           </div>
-          <Loader2 className="h-6 w-6 animate-spin text-yellow-500 mx-auto" />
+          <Loader2 className="h-6 w-6 animate-spin text-[#7367f0] mx-auto" />
         </div>
       </div>
     );
@@ -41,26 +41,19 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50/30 to-yellow-50/50 relative overflow-hidden">
-      {/* Decorative background blobs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-yellow-400/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-1/2 -left-20 w-60 h-60 bg-amber-300/20 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute -bottom-20 right-1/3 w-72 h-72 bg-orange-300/15 rounded-full blur-3xl animate-pulse delay-500" />
-      </div>
-      
+    <div className="min-h-screen bg-[#f8f7fa]">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
       
-      {/* Sidebar - only visible on desktop OR when open on mobile */}
+      {/* Sidebar - Sneat style white sidebar */}
       <aside className={`
-        fixed top-0 left-0 h-full w-64 z-50
-        bg-black/90 backdrop-blur-xl border-r border-white/10
+        fixed top-0 left-0 h-full w-[260px] z-50
+        bg-white shadow-sneat-lg
         transform transition-transform duration-300 ease-in-out
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         lg:translate-x-0
@@ -69,23 +62,23 @@ export default function DashboardLayout({
       </aside>
       
       {/* Main content - pushed right on desktop only */}
-      <div className="lg:pl-64">
+      <div className="lg:pl-[260px]">
         {/* Mobile header with menu button */}
-        <div className="lg:hidden sticky top-0 z-30 bg-white/70 backdrop-blur-xl border-b border-white/20 px-4 py-3 flex items-center justify-between shadow-sm">
+        <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-[#e4e6e8] px-4 py-3 flex items-center justify-between shadow-sneat">
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setSidebarOpen(true)}
-              className="text-gray-600 h-10 w-10"
+              className="text-[#5d596c] h-10 w-10 hover:bg-[#f8f7fa]"
             >
               <Menu className="h-6 w-6" />
             </Button>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-linear-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
-                <span className="text-black text-sm font-bold">B</span>
+              <div className="w-8 h-8 bg-gradient-to-br from-[#7367f0] to-[#9e95f5] rounded-lg flex items-center justify-center shadow-sm">
+                <span className="text-white text-sm font-bold">B</span>
               </div>
-              <span className="font-semibold text-gray-800">BLESSCENT</span>
+              <span className="font-semibold text-[#5d596c]">BLESSCENT</span>
             </div>
           </div>
         </div>

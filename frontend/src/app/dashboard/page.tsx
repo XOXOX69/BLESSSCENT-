@@ -43,45 +43,47 @@ interface StatCardProps {
   color?: string;
 }
 
-function StatCard({ title, value, description, icon, trend, color = 'yellow' }: StatCardProps) {
+function StatCard({ title, value, description, icon, trend, color = 'primary' }: StatCardProps) {
   const colorClasses = {
-    yellow: 'bg-gradient-to-br from-yellow-400/20 to-amber-400/10 text-yellow-600',
-    green: 'bg-gradient-to-br from-green-400/20 to-emerald-400/10 text-green-600',
-    blue: 'bg-gradient-to-br from-blue-400/20 to-indigo-400/10 text-blue-600',
-    purple: 'bg-gradient-to-br from-purple-400/20 to-violet-400/10 text-purple-600',
-    orange: 'bg-gradient-to-br from-orange-400/20 to-red-400/10 text-orange-600',
+    primary: 'bg-[#7367f0]/10 text-[#7367f0]',
+    green: 'bg-[#28c76f]/10 text-[#28c76f]',
+    blue: 'bg-[#00cfe8]/10 text-[#00cfe8]',
+    purple: 'bg-[#7367f0]/10 text-[#7367f0]',
+    orange: 'bg-[#ff9f43]/10 text-[#ff9f43]',
+    yellow: 'bg-[#7367f0]/10 text-[#7367f0]',
   };
 
   const glowColors = {
-    yellow: 'bg-yellow-400',
-    green: 'bg-green-400',
-    blue: 'bg-blue-400',
-    purple: 'bg-purple-400',
-    orange: 'bg-orange-400',
+    primary: 'bg-[#7367f0]',
+    green: 'bg-[#28c76f]',
+    blue: 'bg-[#00cfe8]',
+    purple: 'bg-[#7367f0]',
+    orange: 'bg-[#ff9f43]',
+    yellow: 'bg-[#7367f0]',
   };
 
   return (
-    <Card className="relative overflow-hidden border border-white/50 shadow-lg shadow-black/5 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 bg-white/60 backdrop-blur-sm group">
+    <Card className="relative overflow-hidden border-0 shadow-sneat hover:shadow-sneat-lg hover:scale-[1.02] transition-all duration-300 bg-white group">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium text-gray-500">
+        <CardTitle className="text-sm font-medium text-[#a5a3ae]">
           {title}
         </CardTitle>
-        <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${colorClasses[color as keyof typeof colorClasses]} backdrop-blur-sm`}>
+        <div className={`h-10 w-10 rounded-lg flex items-center justify-center ${colorClasses[color as keyof typeof colorClasses]}`}>
           {icon}
         </div>
       </CardHeader>
       <CardContent>
-        <div className="text-2xl sm:text-3xl font-bold text-gray-900">{value}</div>
+        <div className="text-2xl sm:text-3xl font-bold text-[#5d596c]">{value}</div>
         {(description || trend !== undefined) && (
           <div className="flex items-center mt-2 flex-wrap gap-2">
             {trend !== undefined && (
-              <div className={`flex items-center text-sm font-medium ${trend >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+              <div className={`flex items-center text-sm font-medium ${trend >= 0 ? 'text-[#28c76f]' : 'text-[#ea5455]'}`}>
                 {trend >= 0 ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
                 {Math.abs(trend)}%
               </div>
             )}
             {description && (
-              <p className="text-xs text-gray-500">{description}</p>
+              <p className="text-xs text-[#a5a3ae]">{description}</p>
             )}
           </div>
         )}
@@ -100,25 +102,25 @@ function AlertCard({ title, value, description, icon, variant }: {
   variant: 'warning' | 'danger' | 'info';
 }) {
   const variants = {
-    warning: 'bg-gradient-to-br from-amber-50/80 to-orange-50/80 border-amber-200/50 backdrop-blur-sm',
-    danger: 'bg-gradient-to-br from-red-50/80 to-rose-50/80 border-red-200/50 backdrop-blur-sm',
-    info: 'bg-gradient-to-br from-blue-50/80 to-indigo-50/80 border-blue-200/50 backdrop-blur-sm',
+    warning: 'bg-[#ff9f43]/5 border-[#ff9f43]/20',
+    danger: 'bg-[#ea5455]/5 border-[#ea5455]/20',
+    info: 'bg-[#00cfe8]/5 border-[#00cfe8]/20',
   };
   
   const textVariants = {
-    warning: 'text-amber-700',
-    danger: 'text-red-700',
-    info: 'text-blue-700',
+    warning: 'text-[#ff9f43]',
+    danger: 'text-[#ea5455]',
+    info: 'text-[#00cfe8]',
   };
 
   const glowVariants = {
-    warning: 'bg-amber-400',
-    danger: 'bg-red-400',
-    info: 'bg-blue-400',
+    warning: 'bg-[#ff9f43]',
+    danger: 'bg-[#ea5455]',
+    info: 'bg-[#00cfe8]',
   };
 
   return (
-    <Card className={`${variants[variant]} border shadow-lg shadow-black/5 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 relative overflow-hidden group`}>
+    <Card className={`${variants[variant]} border shadow-sneat hover:shadow-sneat-lg hover:scale-[1.02] transition-all duration-300 relative overflow-hidden group bg-white`}>
       <CardContent className="pt-6">
         <div className="flex items-center justify-between">
           <div>
@@ -207,12 +209,12 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-500 text-sm mt-1">Welcome back! Here&apos;s your business overview.</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#5d596c]">Dashboard</h1>
+          <p className="text-[#a5a3ae] text-sm mt-1">Welcome back! Here&apos;s your business overview.</p>
         </div>
         <div className="flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-yellow-500" />
-          <Badge variant="outline" className="text-xs bg-yellow-50 text-yellow-700 border-yellow-200">
+          <Sparkles className="h-4 w-4 text-[#7367f0]" />
+          <Badge variant="outline" className="text-xs bg-[#7367f0]/10 text-[#7367f0] border-[#7367f0]/20">
             Last updated: {new Date().toLocaleTimeString()}
           </Badge>
         </div>
@@ -252,14 +254,14 @@ export default function DashboardPage() {
 
       {/* Charts - Stack on mobile, side by side on desktop */}
       <div className="grid gap-6 lg:grid-cols-2">
-        <Card className="border border-white/50 shadow-lg backdrop-blur-sm bg-white/60">
+        <Card className="border-0 shadow-sneat bg-white">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2 text-base font-semibold">
-                <Clock className="h-5 w-5 text-yellow-500" />
+              <CardTitle className="flex items-center gap-2 text-base font-semibold text-[#5d596c]">
+                <Clock className="h-5 w-5 text-[#7367f0]" />
                 Today&apos;s Sales
               </CardTitle>
-              <Badge variant="secondary" className="text-xs bg-yellow-100/50 text-yellow-700 border-yellow-200/50">Hourly</Badge>
+              <Badge variant="secondary" className="text-xs bg-[#7367f0]/10 text-[#7367f0] border-0">Hourly</Badge>
             </div>
           </CardHeader>
           <CardContent className="pt-0">
@@ -267,21 +269,21 @@ export default function DashboardPage() {
               <AreaChart data={hourlyData}>
                 <defs>
                   <linearGradient id="salesGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#eab308" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#eab308" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#7367f0" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#7367f0" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="hour" tick={{ fontSize: 11 }} stroke="#9ca3af" />
-                <YAxis tick={{ fontSize: 11 }} stroke="#9ca3af" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e4e6e8" />
+                <XAxis dataKey="hour" tick={{ fontSize: 11 }} stroke="#a5a3ae" />
+                <YAxis tick={{ fontSize: 11 }} stroke="#a5a3ae" />
                 <Tooltip
                   formatter={(value) => [formatCurrency(value as number), 'Sales']}
-                  contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 8px 32px rgba(0,0,0,0.12)', background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(8px)' }}
+                  contentStyle={{ borderRadius: '8px', border: '1px solid #e4e6e8', boxShadow: '0 2px 6px rgba(67, 89, 113, 0.12)', background: '#fff' }}
                 />
                 <Area
                   type="monotone"
                   dataKey="sales"
-                  stroke="#eab308"
+                  stroke="#7367f0"
                   strokeWidth={2}
                   fill="url(#salesGradient)"
                 />
@@ -290,30 +292,30 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="border border-white/50 shadow-lg backdrop-blur-sm bg-white/60">
+        <Card className="border-0 shadow-sneat bg-white">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2 text-base font-semibold">
-                <ShoppingCart className="h-5 w-5 text-yellow-500" />
+              <CardTitle className="flex items-center gap-2 text-base font-semibold text-[#5d596c]">
+                <ShoppingCart className="h-5 w-5 text-[#7367f0]" />
                 Weekly Performance
               </CardTitle>
-              <Badge variant="secondary" className="text-xs bg-yellow-100/50 text-yellow-700 border-yellow-200/50">This Week</Badge>
+              <Badge variant="secondary" className="text-xs bg-[#7367f0]/10 text-[#7367f0] border-0">This Week</Badge>
             </div>
           </CardHeader>
           <CardContent className="pt-0">
             <ResponsiveContainer width="100%" height={250}>
               <BarChart data={weeklyData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="day" tick={{ fontSize: 11 }} stroke="#9ca3af" />
-                <YAxis tick={{ fontSize: 11 }} stroke="#9ca3af" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e4e6e8" />
+                <XAxis dataKey="day" tick={{ fontSize: 11 }} stroke="#a5a3ae" />
+                <YAxis tick={{ fontSize: 11 }} stroke="#a5a3ae" />
                 <Tooltip
                   formatter={(value, name) => [
                     name === 'sales' ? formatCurrency(value as number) : value,
                     name === 'sales' ? 'Sales' : 'Orders'
                   ]}
-                  contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 8px 32px rgba(0,0,0,0.12)', background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(8px)' }}
+                  contentStyle={{ borderRadius: '8px', border: '1px solid #e4e6e8', boxShadow: '0 2px 6px rgba(67, 89, 113, 0.12)', background: '#fff' }}
                 />
-                <Bar dataKey="sales" fill="#eab308" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="sales" fill="#7367f0" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -346,14 +348,14 @@ export default function DashboardPage() {
       </div>
 
       {/* Top 3 Resellers Section */}
-      <Card className="border border-white/50 shadow-lg backdrop-blur-sm bg-gradient-to-br from-white/70 via-yellow-50/30 to-amber-50/30 relative overflow-hidden">
+      <Card className="border-0 shadow-sneat bg-white relative overflow-hidden">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center gap-2 text-base font-semibold">
-              <Trophy className="h-5 w-5 text-yellow-500" />
+            <CardTitle className="flex items-center gap-2 text-base font-semibold text-[#5d596c]">
+              <Trophy className="h-5 w-5 text-[#7367f0]" />
               Top Resellers
             </CardTitle>
-            <Badge variant="secondary" className="text-xs bg-yellow-100/50 text-yellow-700 border-yellow-200/50">By Total Purchases</Badge>
+            <Badge variant="secondary" className="text-xs bg-[#7367f0]/10 text-[#7367f0] border-0">By Total Purchases</Badge>
           </div>
         </CardHeader>
         <CardContent>
@@ -373,20 +375,20 @@ export default function DashboardPage() {
               {topResellers[1] && (
                 <div className="flex flex-col items-center order-1 sm:order-1">
                   <div className="relative mb-3">
-                    <Avatar className="w-16 h-16 border-4 border-gray-300 shadow-lg">
+                    <Avatar className="w-16 h-16 border-4 border-[#a5a3ae] shadow-lg">
                       <AvatarImage src={topResellers[1].imageUrl} alt={topResellers[1].company} />
-                      <AvatarFallback className="bg-gray-100 text-gray-600 text-lg font-bold">
+                      <AvatarFallback className="bg-[#a5a3ae]/10 text-[#6f6b7d] text-lg font-bold">
                         {topResellers[1].company?.[0] || 'R'}
                       </AvatarFallback>
                     </Avatar>
-                    <div className="absolute -bottom-1 -right-1 bg-gray-400 rounded-full p-1">
+                    <div className="absolute -bottom-1 -right-1 bg-[#a5a3ae] rounded-full p-1">
                       <Medal className="h-4 w-4 text-white" />
                     </div>
                   </div>
                   <div className="text-center">
-                    <p className="font-semibold text-gray-900 text-sm truncate max-w-[120px]">{topResellers[1].company}</p>
-                    <p className="text-xs text-gray-500">{topResellers[1].contactPerson}</p>
-                    <p className="text-sm font-bold text-gray-600 mt-1">
+                    <p className="font-semibold text-[#5d596c] text-sm truncate max-w-[120px]">{topResellers[1].company}</p>
+                    <p className="text-xs text-[#a5a3ae]">{topResellers[1].contactPerson}</p>
+                    <p className="text-sm font-bold text-[#6f6b7d] mt-1">
                       {formatCurrency(topResellers[1].totalPurchases || 0)}
                     </p>
                   </div>
@@ -398,23 +400,23 @@ export default function DashboardPage() {
                 <div className="flex flex-col items-center order-0 sm:order-2">
                   <div className="relative mb-3">
                     <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <Trophy className="h-6 w-6 text-yellow-500" />
+                      <Trophy className="h-6 w-6 text-[#7367f0]" />
                     </div>
-                    <Avatar className="w-24 h-24 border-4 border-yellow-400 shadow-xl ring-4 ring-yellow-100">
+                    <Avatar className="w-24 h-24 border-4 border-[#7367f0] shadow-xl ring-4 ring-[#7367f0]/20">
                       <AvatarImage src={topResellers[0].imageUrl} alt={topResellers[0].company} />
-                      <AvatarFallback className="bg-yellow-50 text-yellow-700 text-2xl font-bold">
+                      <AvatarFallback className="bg-[#7367f0]/10 text-[#7367f0] text-2xl font-bold">
                         {topResellers[0].company?.[0] || 'R'}
                       </AvatarFallback>
                     </Avatar>
-                    <div className="absolute -bottom-1 -right-1 bg-yellow-500 rounded-full p-1.5">
+                    <div className="absolute -bottom-1 -right-1 bg-[#7367f0] rounded-full p-1.5">
                       <Award className="h-5 w-5 text-white" />
                     </div>
                   </div>
                   <div className="text-center">
-                    <Badge className="mb-1 bg-yellow-100 text-yellow-700 hover:bg-yellow-100">#1 Top Seller</Badge>
-                    <p className="font-bold text-gray-900 truncate max-w-[140px]">{topResellers[0].company}</p>
-                    <p className="text-sm text-gray-500">{topResellers[0].contactPerson}</p>
-                    <p className="text-lg font-bold text-yellow-600 mt-1">
+                    <Badge className="mb-1 bg-[#7367f0]/10 text-[#7367f0] hover:bg-[#7367f0]/20">#1 Top Seller</Badge>
+                    <p className="font-bold text-[#5d596c] truncate max-w-[140px]">{topResellers[0].company}</p>
+                    <p className="text-sm text-[#a5a3ae]">{topResellers[0].contactPerson}</p>
+                    <p className="text-lg font-bold text-[#7367f0] mt-1">
                       {formatCurrency(topResellers[0].totalPurchases || 0)}
                     </p>
                   </div>
@@ -425,20 +427,20 @@ export default function DashboardPage() {
               {topResellers[2] && (
                 <div className="flex flex-col items-center order-2 sm:order-3">
                   <div className="relative mb-3">
-                    <Avatar className="w-14 h-14 border-4 border-orange-300 shadow-lg">
+                    <Avatar className="w-14 h-14 border-4 border-[#ff9f43] shadow-lg">
                       <AvatarImage src={topResellers[2].imageUrl} alt={topResellers[2].company} />
-                      <AvatarFallback className="bg-orange-50 text-orange-600 text-lg font-bold">
+                      <AvatarFallback className="bg-[#ff9f43]/10 text-[#ff9f43] text-lg font-bold">
                         {topResellers[2].company?.[0] || 'R'}
                       </AvatarFallback>
                     </Avatar>
-                    <div className="absolute -bottom-1 -right-1 bg-orange-400 rounded-full p-1">
+                    <div className="absolute -bottom-1 -right-1 bg-[#ff9f43] rounded-full p-1">
                       <Medal className="h-3 w-3 text-white" />
                     </div>
                   </div>
                   <div className="text-center">
-                    <p className="font-semibold text-gray-900 text-sm truncate max-w-[100px]">{topResellers[2].company}</p>
-                    <p className="text-xs text-gray-500">{topResellers[2].contactPerson}</p>
-                    <p className="text-sm font-bold text-orange-600 mt-1">
+                    <p className="font-semibold text-[#5d596c] text-sm truncate max-w-[100px]">{topResellers[2].company}</p>
+                    <p className="text-xs text-[#a5a3ae]">{topResellers[2].contactPerson}</p>
+                    <p className="text-sm font-bold text-[#ff9f43] mt-1">
                       {formatCurrency(topResellers[2].totalPurchases || 0)}
                     </p>
                   </div>

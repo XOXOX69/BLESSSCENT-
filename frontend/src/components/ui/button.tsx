@@ -10,32 +10,32 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 
-          "bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-semibold shadow-lg shadow-yellow-500/25 hover:shadow-xl hover:shadow-yellow-500/40 hover:scale-[1.02] active:scale-[0.98] hover:from-yellow-300 hover:to-amber-400",
+          "bg-gradient-to-r from-[#7367f0] to-[#9e95f5] text-white font-semibold shadow-lg shadow-[#7367f0]/25 hover:shadow-xl hover:shadow-[#7367f0]/40 hover:scale-[1.02] active:scale-[0.98] hover:from-[#8579f2] hover:to-[#aea6f7]",
         destructive:
-          "bg-gradient-to-r from-red-500 to-rose-600 text-white font-semibold shadow-lg shadow-red-500/25 hover:shadow-xl hover:shadow-red-500/40 hover:scale-[1.02] active:scale-[0.98] hover:from-red-400 hover:to-rose-500",
+          "bg-gradient-to-r from-[#ea5455] to-[#f08182] text-white font-semibold shadow-lg shadow-[#ea5455]/25 hover:shadow-xl hover:shadow-[#ea5455]/40 hover:scale-[1.02] active:scale-[0.98]",
         outline:
-          "border-2 border-yellow-400/50 bg-transparent text-yellow-600 hover:bg-yellow-400/10 hover:border-yellow-400 hover:shadow-lg hover:shadow-yellow-400/20 active:scale-[0.98]",
+          "border-2 border-[#7367f0]/50 bg-transparent text-[#7367f0] hover:bg-[#7367f0]/10 hover:border-[#7367f0] hover:shadow-lg hover:shadow-[#7367f0]/20 active:scale-[0.98]",
         secondary:
-          "bg-gray-100 text-gray-900 hover:bg-gray-200 shadow-sm hover:shadow-md active:scale-[0.98]",
+          "bg-[#f8f7fa] text-[#5d596c] hover:bg-[#eeedf0] shadow-sm hover:shadow-md active:scale-[0.98]",
         ghost:
-          "hover:bg-yellow-400/10 hover:text-yellow-600 active:scale-[0.98]",
+          "hover:bg-[#7367f0]/10 hover:text-[#7367f0] active:scale-[0.98]",
         link: 
-          "text-yellow-600 underline-offset-4 hover:underline hover:text-yellow-500",
+          "text-[#7367f0] underline-offset-4 hover:underline hover:text-[#5f55e4]",
         // New fancy variants
         glow:
-          "bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-semibold relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700 shadow-lg shadow-yellow-500/30 hover:shadow-xl hover:shadow-yellow-400/50 active:scale-[0.98]",
+          "bg-gradient-to-r from-[#7367f0] to-[#9e95f5] text-white font-semibold relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700 shadow-lg shadow-[#7367f0]/30 hover:shadow-xl hover:shadow-[#7367f0]/50 active:scale-[0.98]",
         shine:
-          "bg-black text-yellow-400 font-semibold border border-yellow-400/30 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-yellow-400/20 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-500 hover:border-yellow-400/60 hover:shadow-lg hover:shadow-yellow-400/20 active:scale-[0.98]",
+          "bg-white text-[#7367f0] font-semibold border border-[#7367f0]/30 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-[#7367f0]/20 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-500 hover:border-[#7367f0]/60 hover:shadow-lg hover:shadow-[#7367f0]/20 active:scale-[0.98]",
         glass:
-          "bg-white/20 backdrop-blur-md border border-white/30 text-gray-800 hover:bg-white/40 hover:shadow-lg shadow-black/5 active:scale-[0.98]",
+          "bg-white/80 backdrop-blur-md border border-[#e4e6e8] text-[#5d596c] hover:bg-white hover:shadow-sneat active:scale-[0.98]",
         neon:
-          "bg-transparent border-2 border-yellow-400 text-yellow-400 font-semibold shadow-[0_0_15px_rgba(250,204,21,0.3)] hover:shadow-[0_0_25px_rgba(250,204,21,0.5),0_0_50px_rgba(250,204,21,0.3)] hover:bg-yellow-400/10 active:scale-[0.98] transition-all duration-300",
+          "bg-transparent border-2 border-[#7367f0] text-[#7367f0] font-semibold shadow-[0_0_15px_rgba(115,103,240,0.3)] hover:shadow-[0_0_25px_rgba(115,103,240,0.5),0_0_50px_rgba(115,103,240,0.3)] hover:bg-[#7367f0]/10 active:scale-[0.98] transition-all duration-300",
         gradient:
-          "bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 bg-[length:200%_100%] text-black font-semibold animate-gradient-x hover:shadow-xl hover:shadow-orange-500/30 active:scale-[0.98]",
+          "bg-gradient-to-r from-[#7367f0] via-[#9e95f5] to-[#00cfe8] bg-[length:200%_100%] text-white font-semibold animate-gradient-x hover:shadow-xl hover:shadow-[#7367f0]/30 active:scale-[0.98]",
         pulse:
-          "bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-semibold shadow-lg shadow-yellow-500/30 hover:animate-pulse active:scale-[0.98]",
+          "bg-gradient-to-r from-[#7367f0] to-[#9e95f5] text-white font-semibold shadow-lg shadow-[#7367f0]/30 hover:animate-pulse active:scale-[0.98]",
         slideBg:
-          "relative overflow-hidden bg-transparent border-2 border-yellow-400 text-yellow-400 font-semibold before:absolute before:inset-0 before:bg-gradient-to-r before:from-yellow-400 before:to-amber-500 before:translate-y-full hover:before:translate-y-0 before:transition-transform before:duration-300 hover:text-black [&>*]:relative [&>*]:z-10 active:scale-[0.98]",
+          "relative overflow-hidden bg-transparent border-2 border-[#7367f0] text-[#7367f0] font-semibold before:absolute before:inset-0 before:bg-gradient-to-r before:from-[#7367f0] before:to-[#9e95f5] before:translate-y-full hover:before:translate-y-0 before:transition-transform before:duration-300 hover:text-white [&>*]:relative [&>*]:z-10 active:scale-[0.98]",
       },
       size: {
         default: "h-10 px-5 py-2 has-[>svg]:px-4",
