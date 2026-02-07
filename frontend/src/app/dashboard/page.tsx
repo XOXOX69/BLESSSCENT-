@@ -45,20 +45,28 @@ interface StatCardProps {
 
 function StatCard({ title, value, description, icon, trend, color = 'yellow' }: StatCardProps) {
   const colorClasses = {
-    yellow: 'bg-yellow-400/10 text-yellow-600',
-    green: 'bg-green-400/10 text-green-600',
-    blue: 'bg-blue-400/10 text-blue-600',
-    purple: 'bg-purple-400/10 text-purple-600',
-    orange: 'bg-orange-400/10 text-orange-600',
+    yellow: 'bg-gradient-to-br from-yellow-400/20 to-amber-400/10 text-yellow-600',
+    green: 'bg-gradient-to-br from-green-400/20 to-emerald-400/10 text-green-600',
+    blue: 'bg-gradient-to-br from-blue-400/20 to-indigo-400/10 text-blue-600',
+    purple: 'bg-gradient-to-br from-purple-400/20 to-violet-400/10 text-purple-600',
+    orange: 'bg-gradient-to-br from-orange-400/20 to-red-400/10 text-orange-600',
+  };
+
+  const glowColors = {
+    yellow: 'bg-yellow-400',
+    green: 'bg-green-400',
+    blue: 'bg-blue-400',
+    purple: 'bg-purple-400',
+    orange: 'bg-orange-400',
   };
 
   return (
-    <Card className="relative overflow-hidden border-0 shadow-sm hover:shadow-md transition-all duration-300 bg-white">
+    <Card className="relative overflow-hidden border border-white/50 shadow-lg shadow-black/5 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 bg-white/60 backdrop-blur-sm group">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium text-gray-500">
           {title}
         </CardTitle>
-        <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${colorClasses[color as keyof typeof colorClasses]}`}>
+        <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${colorClasses[color as keyof typeof colorClasses]} backdrop-blur-sm`}>
           {icon}
         </div>
       </CardHeader>
@@ -78,8 +86,8 @@ function StatCard({ title, value, description, icon, trend, color = 'yellow' }: 
           </div>
         )}
       </CardContent>
-      {/* Decorative gradient */}
-      <div className={`absolute top-0 right-0 w-24 h-24 opacity-5 rounded-full blur-2xl ${color === 'yellow' ? 'bg-yellow-400' : color === 'green' ? 'bg-green-400' : color === 'blue' ? 'bg-blue-400' : 'bg-purple-400'}`} />
+      {/* Decorative glow */}
+      <div className={`absolute -top-10 -right-10 w-32 h-32 opacity-10 rounded-full blur-2xl ${glowColors[color as keyof typeof glowColors]} group-hover:opacity-20 transition-opacity`} />
     </Card>
   );
 }
@@ -92,9 +100,9 @@ function AlertCard({ title, value, description, icon, variant }: {
   variant: 'warning' | 'danger' | 'info';
 }) {
   const variants = {
-    warning: 'bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200',
-    danger: 'bg-gradient-to-br from-red-50 to-rose-50 border-red-200',
-    info: 'bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200',
+    warning: 'bg-gradient-to-br from-amber-50/80 to-orange-50/80 border-amber-200/50 backdrop-blur-sm',
+    danger: 'bg-gradient-to-br from-red-50/80 to-rose-50/80 border-red-200/50 backdrop-blur-sm',
+    info: 'bg-gradient-to-br from-blue-50/80 to-indigo-50/80 border-blue-200/50 backdrop-blur-sm',
   };
   
   const textVariants = {
@@ -103,8 +111,14 @@ function AlertCard({ title, value, description, icon, variant }: {
     info: 'text-blue-700',
   };
 
+  const glowVariants = {
+    warning: 'bg-amber-400',
+    danger: 'bg-red-400',
+    info: 'bg-blue-400',
+  };
+
   return (
-    <Card className={`${variants[variant]} border shadow-sm`}>
+    <Card className={`${variants[variant]} border shadow-lg shadow-black/5 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 relative overflow-hidden group`}>
       <CardContent className="pt-6">
         <div className="flex items-center justify-between">
           <div>
@@ -112,11 +126,12 @@ function AlertCard({ title, value, description, icon, variant }: {
             <p className={`text-3xl font-bold mt-1 ${textVariants[variant]}`}>{value}</p>
             <p className={`text-xs mt-1 ${textVariants[variant]} opacity-80`}>{description}</p>
           </div>
-          <div className={`h-12 w-12 rounded-xl flex items-center justify-center ${textVariants[variant]} bg-white/50`}>
+          <div className={`h-12 w-12 rounded-xl flex items-center justify-center ${textVariants[variant]} bg-white/70 backdrop-blur-sm shadow-inner`}>
             {icon}
           </div>
         </div>
       </CardContent>
+      <div className={`absolute -bottom-8 -right-8 w-24 h-24 opacity-20 rounded-full blur-2xl ${glowVariants[variant]} group-hover:opacity-30 transition-opacity`} />
     </Card>
   );
 }
@@ -237,14 +252,14 @@ export default function DashboardPage() {
 
       {/* Charts - Stack on mobile, side by side on desktop */}
       <div className="grid gap-6 lg:grid-cols-2">
-        <Card className="border-0 shadow-sm">
+        <Card className="border border-white/50 shadow-lg backdrop-blur-sm bg-white/60">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2 text-base font-semibold">
                 <Clock className="h-5 w-5 text-yellow-500" />
                 Today&apos;s Sales
               </CardTitle>
-              <Badge variant="secondary" className="text-xs">Hourly</Badge>
+              <Badge variant="secondary" className="text-xs bg-yellow-100/50 text-yellow-700 border-yellow-200/50">Hourly</Badge>
             </div>
           </CardHeader>
           <CardContent className="pt-0">
@@ -261,7 +276,7 @@ export default function DashboardPage() {
                 <YAxis tick={{ fontSize: 11 }} stroke="#9ca3af" />
                 <Tooltip
                   formatter={(value) => [formatCurrency(value as number), 'Sales']}
-                  contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
+                  contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 8px 32px rgba(0,0,0,0.12)', background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(8px)' }}
                 />
                 <Area
                   type="monotone"
@@ -275,14 +290,14 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-sm">
+        <Card className="border border-white/50 shadow-lg backdrop-blur-sm bg-white/60">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2 text-base font-semibold">
                 <ShoppingCart className="h-5 w-5 text-yellow-500" />
                 Weekly Performance
               </CardTitle>
-              <Badge variant="secondary" className="text-xs">This Week</Badge>
+              <Badge variant="secondary" className="text-xs bg-yellow-100/50 text-yellow-700 border-yellow-200/50">This Week</Badge>
             </div>
           </CardHeader>
           <CardContent className="pt-0">
@@ -296,7 +311,7 @@ export default function DashboardPage() {
                     name === 'sales' ? formatCurrency(value as number) : value,
                     name === 'sales' ? 'Sales' : 'Orders'
                   ]}
-                  contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
+                  contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 8px 32px rgba(0,0,0,0.12)', background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(8px)' }}
                 />
                 <Bar dataKey="sales" fill="#eab308" radius={[6, 6, 0, 0]} />
               </BarChart>
@@ -331,14 +346,14 @@ export default function DashboardPage() {
       </div>
 
       {/* Top 3 Resellers Section */}
-      <Card className="border-0 shadow-sm">
+      <Card className="border border-white/50 shadow-lg backdrop-blur-sm bg-gradient-to-br from-white/70 via-yellow-50/30 to-amber-50/30 relative overflow-hidden">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2 text-base font-semibold">
               <Trophy className="h-5 w-5 text-yellow-500" />
               Top Resellers
             </CardTitle>
-            <Badge variant="secondary" className="text-xs">By Total Purchases</Badge>
+            <Badge variant="secondary" className="text-xs bg-yellow-100/50 text-yellow-700 border-yellow-200/50">By Total Purchases</Badge>
           </div>
         </CardHeader>
         <CardContent>

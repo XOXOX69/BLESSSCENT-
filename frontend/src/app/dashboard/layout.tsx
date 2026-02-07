@@ -41,18 +41,26 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50/30 to-yellow-50/50 relative overflow-hidden">
+      {/* Decorative background blobs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-yellow-400/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/2 -left-20 w-60 h-60 bg-amber-300/20 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute -bottom-20 right-1/3 w-72 h-72 bg-orange-300/15 rounded-full blur-3xl animate-pulse delay-500" />
+      </div>
+      
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
       
       {/* Sidebar - only visible on desktop OR when open on mobile */}
       <aside className={`
-        fixed top-0 left-0 h-full w-64 z-50 bg-black
+        fixed top-0 left-0 h-full w-64 z-50
+        bg-black/90 backdrop-blur-xl border-r border-white/10
         transform transition-transform duration-300 ease-in-out
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         lg:translate-x-0
@@ -63,7 +71,7 @@ export default function DashboardLayout({
       {/* Main content - pushed right on desktop only */}
       <div className="lg:pl-64">
         {/* Mobile header with menu button */}
-        <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
+        <div className="lg:hidden sticky top-0 z-30 bg-white/70 backdrop-blur-xl border-b border-white/20 px-4 py-3 flex items-center justify-between shadow-sm">
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"

@@ -174,7 +174,7 @@ export function Header() {
     : 'U';
 
   return (
-    <header className="sticky top-0 z-30 h-16 bg-white border-b border-yellow-200/50 flex items-center justify-between px-4 sm:px-6">
+    <header className="sticky top-0 z-30 h-16 bg-white/70 backdrop-blur-xl border-b border-white/30 flex items-center justify-between px-4 sm:px-6 shadow-sm">
       <div className="flex items-center space-x-4">
         <h1 className="text-lg sm:text-xl font-semibold text-gray-800 truncate">
           Welcome back, {user?.firstName || 'User'}
@@ -185,17 +185,17 @@ export function Header() {
         {/* Notifications */}
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="ghost" size="icon" className="relative h-10 w-10">
+            <Button variant="ghost" size="icon" className="relative h-10 w-10 hover:bg-white/50">
               <Bell className="h-5 w-5" />
               {unreadCount > 0 && (
-                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-yellow-400 text-black border-2 border-white">
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-gradient-to-r from-yellow-400 to-amber-500 text-black border-2 border-white shadow-lg">
                   {unreadCount > 9 ? '9+' : unreadCount}
                 </Badge>
               )}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-80 sm:w-96 p-0" align="end">
-            <div className="flex items-center justify-between p-4 border-b">
+          <PopoverContent className="w-80 sm:w-96 p-0 bg-white/95 backdrop-blur-xl border-white/50 shadow-xl" align="end">
+            <div className="flex items-center justify-between p-4 border-b border-gray-100">
               <h3 className="font-semibold text-gray-900">Notifications</h3>
               {unreadCount > 0 && (
                 <Button 

@@ -42,8 +42,8 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
   };
 
   return (
-    <aside className="h-full bg-black text-white w-full">
-      <div className="flex h-16 items-center justify-between px-4 border-b border-yellow-900/30">
+    <aside className="h-full bg-gradient-to-b from-black via-gray-900 to-black text-white w-full">
+      <div className="flex h-16 items-center justify-between px-4 border-b border-yellow-500/20 bg-yellow-500/5">
         <Link href="/dashboard" onClick={handleNavClick} className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-linear-to-r from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
             <span className="text-black font-bold text-sm">B</span>
@@ -63,7 +63,7 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
         )}
       </div>
 
-      <nav className="p-2 space-y-1">
+      <nav className="p-3 space-y-1">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -74,10 +74,10 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
               href={item.href}
               onClick={handleNavClick}
               className={cn(
-                'flex items-center px-3 py-2.5 rounded-lg transition-colors',
+                'flex items-center px-3 py-2.5 rounded-xl transition-all duration-200',
                 isActive
-                  ? 'bg-linear-to-r from-yellow-400 to-amber-500 text-black font-medium'
-                  : 'text-gray-400 hover:text-yellow-400 hover:bg-yellow-400/10'
+                  ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-medium shadow-lg shadow-yellow-500/25'
+                  : 'text-gray-400 hover:text-yellow-400 hover:bg-white/5 hover:backdrop-blur-sm'
               )}
             >
               <Icon className="h-5 w-5 shrink-0" />
